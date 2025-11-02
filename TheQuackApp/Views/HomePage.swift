@@ -2,6 +2,18 @@ import SwiftUI
 
 struct HomePage: View {
     @Binding var showDuckList: Bool
+    @State private var showDetails = false
+    private var sampleDuck: Duck {
+        Duck(
+            name: "Mallard",
+            scientificName: "Anas platyrhynchos",
+            description: "The mallard is a dabbling duck that breeds throughout the temperate and subtropical Americas, Eurasia, and North Africa.",
+            regions: ["North America", "Europe", "Asia"],
+            images: [],
+            videos: [],
+            sounds: []
+        )
+    }
     
     var body: some View {
         ZStack {
@@ -51,8 +63,9 @@ struct HomePage: View {
                         Text("[Short description]")
                             .foregroundColor(.gray)
                         
+                        // Navigation link activated programmatically so we can prepare data later
                         Button(action: {
-                            // Check details action will be implemented with API
+                            showDetails = true
                         }) {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 15)
@@ -62,6 +75,10 @@ struct HomePage: View {
                                     .foregroundColor(.white)
                                     .padding(.vertical, 12)
                             }
+                        }
+                        // hidden NavigationLink for programmatic navigation
+                        NavigationLink(destination: DuckDetailsView(duck: sampleDuck), isActive: $showDetails) {
+                            EmptyView()
                         }
                     }
                     .padding()
