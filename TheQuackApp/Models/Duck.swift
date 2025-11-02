@@ -10,5 +10,12 @@ struct Duck: Identifiable, Hashable {
     var videos: [URL]
     var sounds: [URL]
 
-    // synthesized Hashable is fine because all stored properties are Hashable
+    // Provide explicit Hashable implementation to avoid any ambiguity for navigationDestination
+    static func == (lhs: Duck, rhs: Duck) -> Bool {
+        return lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
