@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct DuckListView: View {
+    @Binding var showDuckList: Bool
     @State private var searchText = ""
     @State private var selectedRegion = "All"
     
@@ -36,9 +37,19 @@ struct DuckListView: View {
             VStack(spacing: 20) {
                 // Header
                 HStack {
+                    Button(action: {
+                        // back to home
+                        showDuckList = false
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                    }
+
                     Text("Ducks")
-                        .font(.largeTitle)
-                        .bold()
+                        .font(.system(size: 36, weight: .bold))
+                        .foregroundColor(.white)
+                        .padding(.leading, 6)
                     
                     Spacer()
                     
@@ -47,7 +58,7 @@ struct DuckListView: View {
                     } label: {
                         Image(systemName: "gearshape.fill")
                             .font(.title)
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                     }
                 }
                 
@@ -149,5 +160,5 @@ struct DuckRowView: View {
 }
 
 #Preview {
-    DuckListView()
+    DuckListView(showDuckList: .constant(true))
 }

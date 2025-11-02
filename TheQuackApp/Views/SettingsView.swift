@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @Environment(\.dismiss) private var dismiss
     @AppStorage("showScientificNames") private var showScientificNames = true
     @AppStorage("darkMode") private var darkMode = false
     
@@ -12,19 +11,11 @@ struct SettingsView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 20) {
-                // Header
+                // Header (use NavigationStack/back automatically)
                 HStack {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .font(.title2)
-                            .foregroundColor(.black)
-                    }
-                    
                     Text("Settings")
-                        .font(.title)
-                        .bold()
+                        .font(.system(size: 34, weight: .bold))
+                        .foregroundColor(.white)
                     
                     Spacer()
                 }

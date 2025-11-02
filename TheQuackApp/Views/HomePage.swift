@@ -12,8 +12,8 @@ struct HomePage: View {
             VStack(alignment: .leading, spacing: 20) {
                 HStack {
                     Text("Hello, Ornitologist!")
-                        .font(.largeTitle)
-                        .bold()
+                        .font(.system(size: 36, weight: .bold))
+                        .foregroundColor(.white)
                     
                     Spacer()
                     
@@ -22,7 +22,7 @@ struct HomePage: View {
                     } label: {
                         Image(systemName: "gearshape.fill")
                             .font(.title)
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                     }
                 }
                 

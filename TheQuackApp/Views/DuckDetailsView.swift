@@ -2,7 +2,6 @@ import SwiftUI
 
 struct DuckDetailsView: View {
     let duck: Duck
-    @Environment(\.dismiss) private var dismiss
     @State private var selectedTab = 0
     
     var body: some View {
@@ -12,19 +11,11 @@ struct DuckDetailsView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 20) {
-                // Header
+                // Header (use NavigationStack back button when available)
                 HStack {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "chevron.left")
-                            .font(.title2)
-                            .foregroundColor(.black)
-                    }
-                    
                     Text("Details")
-                        .font(.title)
-                        .bold()
+                        .font(.system(size: 34, weight: .bold))
+                        .foregroundColor(.white)
                     
                     Spacer()
                 }

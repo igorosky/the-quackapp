@@ -6,7 +6,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             if showDuckList {
-                DuckListView()
+                DuckListView(showDuckList: $showDuckList)
             } else {
                 HomePage(showDuckList: $showDuckList)
             }
