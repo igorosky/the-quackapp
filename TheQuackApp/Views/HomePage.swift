@@ -76,9 +76,9 @@ struct HomePage: View {
                                     .padding(.vertical, 12)
                             }
                         }
-                        // hidden NavigationLink for programmatic navigation
-                        NavigationLink(destination: DuckDetailsView(duck: sampleDuck), isActive: $showDetails) {
-                            EmptyView()
+                        // Use navigationDestination(isPresented:) (iOS 16+) instead of the deprecated isActive link
+                        .navigationDestination(isPresented: $showDetails) {
+                            DuckDetailsView(duck: sampleDuck)
                         }
                     }
                     .padding()
