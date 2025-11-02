@@ -1,6 +1,6 @@
 import Foundation
 
-struct Duck: Identifiable {
+struct Duck: Identifiable, Hashable {
     let id: UUID = UUID()
     let name: String
     let scientificName: String
@@ -9,4 +9,6 @@ struct Duck: Identifiable {
     var images: [URL]
     var videos: [URL]
     var sounds: [URL]
+
+    // synthesized Hashable is fine because all stored properties are Hashable
 }

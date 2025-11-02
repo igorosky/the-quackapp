@@ -94,7 +94,7 @@ struct DuckListView: View {
                 ScrollView {
                     LazyVStack(spacing: 15) {
                         ForEach(filteredDucks) { duck in
-                            NavigationLink(destination: DuckDetailsView(duck: duck)) {
+                            NavigationLink(value: duck) {
                                 DuckRowView(duck: duck)
                             }
                         }

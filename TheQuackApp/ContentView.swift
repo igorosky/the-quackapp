@@ -11,6 +11,9 @@ struct ContentView: View {
                 HomePage(showDuckList: $showDuckList)
             }
         }
+        .navigationDestination(for: Duck.self) { duck in
+            DuckDetailsView(duck: duck)
+        }
     }
 }
 
