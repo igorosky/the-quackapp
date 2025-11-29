@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @ObservedObject private var settings = AppSettings.shared
+    @ObservedObject private var settings         = AppSettings.shared
     @AppStorage("darkMode") private var darkMode = false
 
     var body: some View {

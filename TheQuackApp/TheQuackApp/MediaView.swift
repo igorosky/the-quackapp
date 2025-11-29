@@ -8,9 +8,9 @@ struct MediaView: View {
     let mediaType: DuckDetailView.MediaType
     @State private var index: Int
 
-    @State private var avPlayer: AVPlayer? = nil
+    @State private var avPlayer: AVPlayer?         = nil
     @State private var audioPlayer: AVAudioPlayer? = nil
-    @State private var isPlayingAudio: Bool = false
+    @State private var isPlayingAudio: Bool        = false
 
     init(title: String, items: [String], mediaType: DuckDetailView.MediaType, startIndex: Int = 0) {
         self.title = title

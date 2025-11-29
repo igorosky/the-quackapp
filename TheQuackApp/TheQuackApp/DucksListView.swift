@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct DucksListView: View {
-    @State private var searchText: String = ""
+    @State private var searchText: String     = ""
     @State private var selectedRegion: Region = .all
-    private var ducks = Duck.sample
+    private var ducks                         = Duck.sample
     
     var filteredDucks: [Duck] {
         ducks.filter { duck in
