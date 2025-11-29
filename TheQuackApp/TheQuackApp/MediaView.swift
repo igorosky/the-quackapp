@@ -1,13 +1,21 @@
 import SwiftUI
+import AVKit
+import AVFoundation
 
 struct MediaView: View {
     let title: String
     let items: [String]
+    let mediaType: DuckDetailView.MediaType
     @State private var index: Int
 
-    init(title: String, items: [String], startIndex: Int = 0) {
+    @State private var avPlayer: AVPlayer? = nil
+    @State private var audioPlayer: AVAudioPlayer? = nil
+    @State private var isPlayingAudio: Bool = false
+
+    init(title: String, items: [String], mediaType: DuckDetailView.MediaType, startIndex: Int = 0) {
         self.title = title
         self.items = items
+        self.mediaType = mediaType
         _index = State(initialValue: startIndex)
     }
 
@@ -21,21 +29,59 @@ struct MediaView: View {
                     .frame(height: 220)
                     .overlay(Text("No media available").foregroundColor(.secondary))
             } else {
-                MediaImage(imageNameOrURL: items[index])
-                    .frame(height: 320)
-                    .cornerRadius(16)
-                    .clipped()
+                switch mediaType {
+                case .images:
+                    MediaImage(imageNameOrURL: items[index])
+                        .frame(height: 320)
+                        .cornerRadius(16)
+                        .clipped()
+
+                case .videos:
+                    if let url = URL(string: items[index]) {
+                        VideoPlayer(player: AVPlayer(url: url))
+                            .frame(height: 320)
+                            .cornerRadius(12)
+                    } else {
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color.gray.opacity(0.3))
+                            .frame(height: 220)
+                            .overlay(Text("Invalid video URL").foregroundColor(.secondary))
+                    }
+
+                case .sounds:
+                    VStack(spacing: 12) {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.gray.opacity(0.12))
+                            .frame(height: 120)
+                            .overlay(
+                                Image(systemName: "waveform.circle.fill")
+                                    .font(.system(size: 48))
+                                    .foregroundColor(.green)
+                            )
+
+                        HStack(spacing: 20) {
+                            Button(action: toggleAudio) {
+                                Image(systemName: isPlayingAudio ? "pause.circle.fill" : "play.circle.fill")
+                                    .font(.system(size: 44))
+                            }
+
+                            Text(items[index].components(separatedBy: "/").last ?? "Audio")
+                                .lineLimit(1)
+                                .truncationMode(.middle)
+                        }
+                    }
+                }
             }
 
             HStack(spacing: 40) {
-                Button(action: { index = max(0, index - 1) }) {
+                Button(action: prev) {
                     Label("Previous", systemImage: "chevron.left")
                 }
                 .disabled(items.isEmpty || index == 0)
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 20).fill(Color.green.opacity(0.6)))
 
-                Button(action: { index = min((items.count - 1), index + 1) }) {
+                Button(action: next) {
                     Label("Next", systemImage: "chevron.right")
                 }
                 .disabled(items.isEmpty || index >= items.count - 1)
@@ -47,11 +93,82 @@ struct MediaView: View {
             Spacer()
         }
         .padding()
+        .onAppear { prepareCurrent() }
+        .onChange(of: index) { _ in prepareCurrent() }
+        .onDisappear { stopAll() }
+    }
+
+    private func prev() { index = max(0, index - 1) }
+    private func next() { index = min((items.count - 1), index + 1) }
+
+    private func prepareCurrent() {
+        stopAll()
+        guard !items.isEmpty else { return }
+        let current = items[index]
+        switch mediaType {
+        case .images:
+            break
+        case .videos:
+            if let url = URL(string: current) {
+                avPlayer = AVPlayer(url: url)
+                // don't autoplay here; VideoPlayer will control playback
+            }
+        case .sounds:
+            // attempt to load audio (supports remote URLs by downloading data)
+            if let url = URL(string: current) {
+                if url.isFileURL {
+                    do {
+                        audioPlayer = try AVAudioPlayer(contentsOf: url)
+                        audioPlayer?.prepareToPlay()
+                    } catch {
+                        audioPlayer = nil
+                    }
+                } else {
+                    // download
+                    URLSession.shared.dataTask(with: url) { data, _, _ in
+                        guard let data = data else { return }
+                        DispatchQueue.main.async {
+                            do {
+                                audioPlayer = try AVAudioPlayer(data: data)
+                                audioPlayer?.prepareToPlay()
+                            } catch {
+                                audioPlayer = nil
+                            }
+                        }
+                    }.resume()
+                }
+            }
+        }
+    }
+
+    private func toggleAudio() {
+        guard mediaType == .sounds else { return }
+        if let player = audioPlayer {
+            if player.isPlaying {
+                player.pause()
+                isPlayingAudio = false
+            } else {
+                player.play()
+                isPlayingAudio = true
+            }
+        }
+    }
+
+    private func stopAll() {
+        avPlayer?.pause()
+        avPlayer = nil
+        audioPlayer?.stop()
+        audioPlayer = nil
+        isPlayingAudio = false
     }
 }
 
 struct MediaView_Previews: PreviewProvider {
     static var previews: some View {
-        MediaView(title: "Images", items: ["https://via.placeholder.com/600", "https://via.placeholder.com/400"], startIndex: 0)
+        Group {
+            MediaView(title: "Images", items: ["https://via.placeholder.com/600", "https://via.placeholder.com/400"], mediaType: .images, startIndex: 0)
+            MediaView(title: "Videos", items: ["https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4"], mediaType: .videos, startIndex: 0)
+            MediaView(title: "Sounds", items: ["https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3"], mediaType: .sounds, startIndex: 0)
+        }
     }
 }
