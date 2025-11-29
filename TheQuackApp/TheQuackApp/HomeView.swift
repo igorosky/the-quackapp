@@ -49,7 +49,7 @@ struct HomeView: View {
                                     .fill(Theme.bgBottom.opacity(0.8))
                                     .cornerRadius(20)
                                     .frame(height: 160)
-                                    .overlay(Text("[Image of a duck").foregroundColor(.white))
+                                    .overlay(Text("[Image of a duck]").foregroundColor(.white))
 
                                 VStack(alignment: .leading, spacing: 6) {
                                     Text(duck.name)
@@ -60,7 +60,7 @@ struct HomeView: View {
                                 }
                                 .padding(.horizontal)
                                 .padding(.bottom, 8)
-                                .background(Color.white)
+                                .background(Theme.cardBackground)
                                 .cornerRadius(14)
                                 .padding(.horizontal, 12)
                             }
@@ -85,7 +85,7 @@ struct HomeView: View {
                             .font(.title2)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(RoundedRectangle(cornerRadius: 30).fill(Color.white.opacity(0.9)))
+                            .background(RoundedRectangle(cornerRadius: 30).fill(Theme.cardBackground))
                             .padding(.horizontal)
                     }
 

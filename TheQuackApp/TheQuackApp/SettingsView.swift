@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @State private var showScientific = true
-    @State private var darkMode = false
+    @AppStorage("darkMode") private var darkMode = false
 
     var body: some View {
         ZStack {
@@ -25,7 +25,7 @@ struct SettingsView: View {
                         Toggle("Dark mode", isOn: $darkMode)
                     }
                     .padding()
-                    .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
+                    .background(RoundedRectangle(cornerRadius: 20).fill(Theme.cardBackground))
                     .padding(.horizontal)
 
                     VStack(spacing: 16) {
@@ -37,7 +37,7 @@ struct SettingsView: View {
                         }
                     }
                     .padding()
-                    .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
+                    .background(RoundedRectangle(cornerRadius: 20).fill(Theme.cardBackground))
                     .padding(.horizontal)
 
                     Spacer()
