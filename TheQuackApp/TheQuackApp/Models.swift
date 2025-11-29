@@ -1,14 +1,14 @@
 import Foundation
 
 enum Region: String, CaseIterable {
-    case all = "All"
+    case all          = "All"
     case northAmerica = "North America"
     case southAmerica = "South America"
-    case europe = "Europe"
-    case asia = "Asia"
-    case africa = "Africa"
-    case oceania = "Oceania"
-    case antarctica = "Antarctica"
+    case europe       = "Europe"
+    case asia         = "Asia"
+    case africa       = "Africa"
+    case oceania      = "Oceania"
+    case antarctica   = "Antarctica"
 }
 
 struct Duck: Identifiable, Hashable {
@@ -18,7 +18,7 @@ struct Duck: Identifiable, Hashable {
     let region: Region
     let shortDescription: String
     let description: String
-    // placeholders for media
+    // Placeholders for media
     let images: [String]
     let videos: [String]
     let sounds: [String]

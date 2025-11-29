@@ -1,13 +1,12 @@
+
 import SwiftUI
 import Combine
 
 final class AppSettings: ObservableObject {
     // Manual publisher to ensure ObservableObject conformance
-    let objectWillChange = ObservableObjectPublisher()
-
+    let objectWillChange   = ObservableObjectPublisher()
     private static let key = "showScientificNames"
-
-    static let shared = AppSettings()
+    static let shared      = AppSettings()
 
     var showScientificNames: Bool {
         didSet {

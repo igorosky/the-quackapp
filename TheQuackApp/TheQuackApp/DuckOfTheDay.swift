@@ -3,11 +3,10 @@ import Combine
 
 final class DuckOfTheDay: ObservableObject {
     static let shared = DuckOfTheDay()
-
-    @Published private(set) var currentDuck: Duck?
-
     private let nameKey = "duckOfTheDayName"
     private let dateKey = "duckOfTheDayDate"
+    
+    @Published private(set) var currentDuck: Duck?
 
     private init() {}
 
@@ -17,7 +16,7 @@ final class DuckOfTheDay: ObservableObject {
         return fmt.string(from: Date())
     }
 
-    /// Ensure there's a duck selected for today. If not, pick one randomly and persist it.
+    // Ensure there's a duck selected for today. If not, pick one randomly and persist it.
     func updateIfNeeded(from ducks: [Duck]) {
         guard !ducks.isEmpty else {
             currentDuck = nil
@@ -43,7 +42,7 @@ final class DuckOfTheDay: ObservableObject {
         defaults.set(today, forKey: dateKey)
     }
 
-    /// Force a new random duck (useful for debugging or manual refresh)
+    // Force a new random duck (useful for debugging or manual refresh)
     func refresh(from ducks: [Duck]) {
         guard !ducks.isEmpty else { currentDuck = nil; return }
         let chosen = ducks.randomElement()!

@@ -6,7 +6,6 @@ struct HomeView: View {
 
     var body: some View {
         ZStack {
-            // green gradient background (theme)
             LinearGradient(colors: [Theme.bgTop, Theme.bgBottom], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
 
