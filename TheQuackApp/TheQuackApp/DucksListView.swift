@@ -123,16 +123,25 @@ struct DucksListView: View {
 
 struct DuckRow: View {
     let duck: Duck
+    @ObservedObject private var settings = AppSettings.shared
     var body: some View {
         HStack(spacing: 16) {
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color.white)
+            MediaImage(imageNameOrURL: duck.images.first)
                 .frame(width: 72, height: 72)
-                .shadow(radius: 8)
+                .cornerRadius(12)
+                .shadow(radius: 6)
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(duck.name).font(.headline)
-                Text(duck.region.rawValue).foregroundColor(.secondary)
+                if settings.showScientificNames, let sci = duck.scientificName {
+                    Text(sci)
+                        .font(.subheadline)
+                        .italic()
+                        .foregroundColor(.secondary)
+                }
+                Text(duck.region.rawValue)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
             }
             Spacer()
         }
