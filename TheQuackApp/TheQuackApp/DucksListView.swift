@@ -61,7 +61,7 @@ struct DucksListView: View {
                             Spacer()
                         }
                         .padding()
-                        .background(Color.white)
+                        .background(Theme.cardBackground)
                         .clipShape(
                             RoundedCorner(radius: 30, corners: [.topLeft, .topRight])
                         )
@@ -104,7 +104,7 @@ struct DucksListView: View {
                                     .padding(.vertical, 8)
                                 }
                             }
-                            .background(Color.white)
+                            .background(Theme.cardBackground)
                             .clipShape(
                                 RoundedCorner(radius: 30, corners: [.bottomLeft, .bottomRight])
                             )
