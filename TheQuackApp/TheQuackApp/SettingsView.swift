@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var showScientific = true
+    @ObservedObject private var settings = AppSettings.shared
     @AppStorage("darkMode") private var darkMode = false
 
     var body: some View {
@@ -20,7 +20,9 @@ struct SettingsView: View {
 
                     VStack(spacing: 16) {
                         Text("Display").font(.title2).bold()
-                        Toggle("Scientific names", isOn: $showScientific)
+                        Toggle(isOn: Binding(get: { settings.showScientificNames }, set: { settings.showScientificNames = $0 })) {
+                            Text("Scientific names")
+                        }
                         Divider()
                         Toggle("Dark mode", isOn: $darkMode)
                     }

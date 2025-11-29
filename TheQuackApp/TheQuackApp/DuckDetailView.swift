@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DuckDetailView: View {
     let duck: Duck
+    @ObservedObject private var settings = AppSettings.shared
     
     enum MediaType: String, CaseIterable, Identifiable {
         case images = "Images"
@@ -40,15 +41,18 @@ struct DuckDetailView: View {
                     .padding(.horizontal)
 
                     VStack(spacing: 12) {
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(Theme.bgBottom.opacity(0.8))
+                        MediaImage(imageNameOrURL: duck.images.first)
                             .frame(height: 220)
-                            .overlay(Text("[Image of a duck]").foregroundColor(.white))
+                            .cornerRadius(20)
+                            .clipped()
 
                         VStack(alignment: .leading, spacing: 8) {
                             Text(duck.name).font(.title).bold()
-                            if let sci = duck.scientificName {
-                                Text(sci).foregroundColor(.secondary)
+                            if settings.showScientificNames, let sci = duck.scientificName {
+                                Text(sci)
+                                    .font(.subheadline)
+                                    .italic()
+                                    .foregroundColor(.secondary)
                             }
                             Divider()
                             Text(duck.description).foregroundColor(.primary)

@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    private let duck = Duck.sample.first!
+    @ObservedObject private var duckOfTheDay = DuckOfTheDay.shared
+    private let fallbackDuck = Duck.sample.first!
 
     var body: some View {
         ZStack {
@@ -33,7 +34,10 @@ struct HomeView: View {
                             .font(.title2)
                             .foregroundColor(.primary)
                             .frame(maxWidth: .infinity, alignment: .leading)
-
+                        // ensure we have a selection for today when this view appears
+                        Color.clear.onAppear {
+                            DuckOfTheDay.shared.updateIfNeeded(from: Duck.sample)
+                        }
                         // big card
                         ZStack(alignment: .bottom) {
                             RoundedRectangle(cornerRadius: 28)
@@ -45,16 +49,16 @@ struct HomeView: View {
                                 )
 
                             VStack(spacing: 8) {
-                                Rectangle()
-                                    .fill(Theme.bgBottom.opacity(0.8))
-                                    .cornerRadius(20)
+                                MediaImage(imageNameOrURL: (duckOfTheDay.currentDuck ?? fallbackDuck).images.first)
                                     .frame(height: 160)
-                                    .overlay(Text("[Image of a duck]").foregroundColor(.white))
+                                    .cornerRadius(20)
+                                    .overlay(Text("[Image of a duck]").foregroundColor(.white).opacity(0))
 
                                 VStack(alignment: .leading, spacing: 6) {
-                                    Text(duck.name)
+                                    let shown = duckOfTheDay.currentDuck ?? fallbackDuck
+                                    Text(shown.name)
                                         .font(.title3).bold()
-                                    Text(duck.shortDescription)
+                                    Text(shown.shortDescription)
                                         .font(.subheadline)
                                         .foregroundColor(.secondary)
                                 }
@@ -67,7 +71,7 @@ struct HomeView: View {
                             .padding(.bottom, 8)
                         }
 
-                        NavigationLink(destination: DuckDetailView(duck: duck)) {
+                        NavigationLink(destination: DuckDetailView(duck: duckOfTheDay.currentDuck ?? fallbackDuck)) {
                             Text("Check details")
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 16)
