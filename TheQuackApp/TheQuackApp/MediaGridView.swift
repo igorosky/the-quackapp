@@ -40,7 +40,7 @@ struct MediaGridView: View {
                     } else {
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(Array(items.enumerated()), id: \.element) { index, item in
-                                NavigationLink(destination: MediaView(title: mediaType.rawValue, items: items, startIndex: index)) {
+                                NavigationLink(destination: MediaView(title: mediaType.rawValue, items: items, mediaType: mediaType, startIndex: index)) {
                                     // show thumbnail for images, and generic icon for other media types
                                     if mediaType == .images {
                                         MediaImage(imageNameOrURL: item)
