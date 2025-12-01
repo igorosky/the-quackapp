@@ -94,7 +94,7 @@ struct MediaView: View {
         }
         .padding()
         .onAppear { prepareCurrent() }
-        .onChange(of: index) { _ in prepareCurrent() }
+        .onChange(of: index) { _, _ in prepareCurrent() }
         .onDisappear { stopAll() }
     }
 
