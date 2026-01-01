@@ -3,6 +3,7 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject private var duckOfTheDay = DuckOfTheDay.shared
     private let fallbackDuck = Duck.sample.first!
+    @StateObject private var store = DucksStore()
 
     var body: some View {
         ZStack {
@@ -35,13 +36,16 @@ struct HomeView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         // ensure we have a selection for today when this view appears
                         Color.clear.onAppear {
-                            DuckOfTheDay.shared.updateIfNeeded(from: Duck.sample)
+                            DuckOfTheDay.shared.updateIfNeeded(from: store.ducks)
+                        }
+                        .onReceive(store.$ducks) { ducks in
+                            DuckOfTheDay.shared.updateIfNeeded(from: ducks)
                         }
                         // big card
                         ZStack(alignment: .bottom) {
                             RoundedRectangle(cornerRadius: 28)
                                 .fill(Theme.cardBackground.opacity(0.98))
-                                .frame(height: 260)
+                                .frame(height: 300)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 28)
                                         .stroke(Color.black.opacity(0.02))
@@ -49,7 +53,7 @@ struct HomeView: View {
 
                             VStack(spacing: 8) {
                                 MediaImage(imageNameOrURL: (duckOfTheDay.currentDuck ?? fallbackDuck).images.first)
-                                    .frame(height: 160)
+                                    .frame(height: 200)
                                     .cornerRadius(20)
                                     .overlay(Text("[Image of a duck]").foregroundColor(.white).opacity(0))
 
@@ -65,7 +69,7 @@ struct HomeView: View {
                                 .padding(.bottom, 8)
                                 .background(Theme.cardBackground)
                                 .cornerRadius(14)
-                                .padding(.horizontal, 12)
+                                .padding(.horizontal, 30)
                             }
                             .padding(.bottom, 8)
                         }

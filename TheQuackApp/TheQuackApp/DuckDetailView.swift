@@ -3,6 +3,7 @@ import SwiftUI
 struct DuckDetailView: View {
     let duck: Duck
     @ObservedObject private var settings = AppSettings.shared
+    @State private var selectedMediaType: MediaType?
     
     enum MediaType: String, CaseIterable, Identifiable {
         case images = "Images"
@@ -28,21 +29,34 @@ struct DuckDetailView: View {
                                     // media type buttons
                     HStack(spacing: 12) {
                         ForEach(MediaType.allCases) { type in
-                            NavigationLink(destination: MediaGridView(duck: duck, mediaType: type)) {
-                                Text(type.rawValue)
-                                    .padding(.vertical, 10)
-                                    .frame(maxWidth: .infinity)
-                                    .background(Theme.buttonGreen)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(20)
+                            Button(action: {
+                                selectedMediaType = type
+                            }) {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(Theme.buttonGreen)
+                                    
+                                    Text(type.rawValue)
+                                        .font(.system(size: 16, weight: .semibold))
+                                        .foregroundColor(.white)
+                                        .padding(.vertical, 16)
+                                        .padding(.horizontal, 8)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .frame(minHeight: 50)
+                                .contentShape(Rectangle())
                             }
+                            .buttonStyle(.plain)
                         }
                     }
                     .padding(.horizontal)
+                    .navigationDestination(item: $selectedMediaType) { type in
+                        MediaGridView(duck: duck, mediaType: type)
+                    }
 
                     VStack(spacing: 12) {
                         MediaImage(imageNameOrURL: duck.images.first)
-                            .frame(height: 220)
+                            .frame(height: 200)
                             .cornerRadius(20)
                             .clipped()
 
@@ -57,10 +71,22 @@ struct DuckDetailView: View {
                             Divider()
                             Text(duck.description).foregroundColor(.primary)
                                 .fixedSize(horizontal: false, vertical: true)
+                            if let cool = duck.coolFacts, !cool.isEmpty {
+                                Divider()
+                                Text("Cool facts")
+                                    .font(.headline)
+                                Text(cool).foregroundColor(.primary).fixedSize(horizontal: false, vertical: true)
+                            }
+                            if let find = duck.findThisBird, !find.isEmpty {
+                                Divider()
+                                Text("Find this bird")
+                                    .font(.headline)
+                                Text(find).foregroundColor(.primary).fixedSize(horizontal: false, vertical: true)
+                            }
                             Divider()
                             HStack {
                                 Text("Regions:").bold()
-                                Text(duck.region.rawValue)
+                                Text(duck.regions.map { $0.rawValue }.joined(separator: ", "))
                                 Spacer()
                             }
                         }
