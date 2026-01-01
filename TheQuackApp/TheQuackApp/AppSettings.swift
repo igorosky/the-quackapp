@@ -8,6 +8,8 @@ final class AppSettings: ObservableObject {
     private static let key = "showScientificNames"
     static let shared      = AppSettings()
 
+    private static let serverKey = "serverBaseURL"
+
     var showScientificNames: Bool {
         didSet {
             UserDefaults.standard.set(showScientificNames, forKey: Self.key)
@@ -15,8 +17,17 @@ final class AppSettings: ObservableObject {
         }
     }
 
+    // Base URL for the ducks server (editable in Settings)
+    var serverBaseURL: String {
+        didSet {
+            UserDefaults.standard.set(serverBaseURL, forKey: Self.serverKey)
+            objectWillChange.send()
+        }
+    }
+
     private init() {
         self.showScientificNames = UserDefaults.standard.object(forKey: Self.key) as? Bool ?? false
+        self.serverBaseURL = UserDefaults.standard.string(forKey: Self.serverKey) ?? "http://localhost/"
     }
 }
 

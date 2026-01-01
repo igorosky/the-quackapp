@@ -42,11 +42,11 @@ struct MediaGridView: View {
                             ForEach(Array(items.enumerated()), id: \.element) { index, item in
                                 NavigationLink(destination: MediaView(title: mediaType.rawValue, items: items, mediaType: mediaType, startIndex: index)) {
                                     // show thumbnail for images, and generic icon for other media types
-                                    if mediaType == .images {
-                                        MediaImage(imageNameOrURL: item)
-                                            .aspectRatio(1.0, contentMode: .fill)
-                                            .cornerRadius(12)
-                                            .clipped()
+                                        if mediaType == .images {
+                                            MediaImage(imageNameOrURL: item)
+                                                .frame(height: 140)
+                                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                                .clipped()
                                     } else {
                                         MediaItemView(mediaType: mediaType)
                                     }

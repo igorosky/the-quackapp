@@ -37,6 +37,14 @@ struct SettingsView: View {
                             Spacer()
                             Text("1.0.0").foregroundColor(.secondary)
                         }
+                        Divider()
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("[DEV] Ducks server URL").font(.subheadline).bold()
+                            TextField("http://localhost/", text: Binding(get: { settings.serverBaseURL }, set: { settings.serverBaseURL = $0 }))
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .keyboardType(.URL)
+                                .autocapitalization(.none)
+                        }
                     }
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 20).fill(Theme.cardBackground))

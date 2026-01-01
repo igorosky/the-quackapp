@@ -11,6 +11,7 @@ struct MediaView: View {
     @State private var avPlayer: AVPlayer?         = nil
     @State private var audioPlayer: AVAudioPlayer? = nil
     @State private var isPlayingAudio: Bool        = false
+    @State private var lastAction: Int = 0 // -1 previous, 1 next -> controls transition direction
 
     init(title: String, items: [String], mediaType: DuckDetailView.MediaType, startIndex: Int = 0) {
         self.title = title
@@ -29,66 +30,92 @@ struct MediaView: View {
                     .frame(height: 220)
                     .overlay(Text("No media available").foregroundColor(.secondary))
             } else {
-                switch mediaType {
-                case .images:
-                    MediaImage(imageNameOrURL: items[index])
-                        .frame(height: 320)
-                        .cornerRadius(16)
-                        .clipped()
+                // animated media container
+                let insertion: AnyTransition = .move(edge: lastAction >= 0 ? .trailing : .leading).combined(with: .opacity)
+                let removal: AnyTransition = .move(edge: lastAction >= 0 ? .leading : .trailing).combined(with: .opacity)
+                let transition = AnyTransition.asymmetric(insertion: insertion, removal: removal)
 
-                case .videos:
-                    if let url = URL(string: items[index]) {
-                        VideoPlayer(player: AVPlayer(url: url))
-                            .frame(height: 320)
-                            .cornerRadius(12)
-                    } else {
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill(Color.gray.opacity(0.3))
-                            .frame(height: 220)
-                            .overlay(Text("Invalid video URL").foregroundColor(.secondary))
-                    }
+                ZStack {
+                    // content keyed by index so transition runs on change
+                    Group {
+                        switch mediaType {
+                        case .images:
+                            MediaImage(imageNameOrURL: items[index])
+                                .frame(height: 320)
+                                .cornerRadius(16)
+                                .clipped()
 
-                case .sounds:
-                    VStack(spacing: 12) {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.gray.opacity(0.12))
-                            .frame(height: 120)
-                            .overlay(
-                                Image(systemName: "waveform.circle.fill")
-                                    .font(.system(size: 48))
-                                    .foregroundColor(.green)
-                            )
-
-                        HStack(spacing: 20) {
-                            Button(action: toggleAudio) {
-                                Image(systemName: isPlayingAudio ? "pause.circle.fill" : "play.circle.fill")
-                                    .font(.system(size: 44))
+                        case .videos:
+                            if let _ = URL(string: items[index]) {
+                                if let player = avPlayer {
+                                    VideoPlayer(player: player)
+                                        .frame(height: 320)
+                                        .cornerRadius(12)
+                                } else {
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(Color.gray.opacity(0.3))
+                                        .frame(height: 220)
+                                        .overlay(Text("Preparing video...").foregroundColor(.secondary))
+                                }
+                            } else {
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color.gray.opacity(0.3))
+                                    .frame(height: 220)
+                                    .overlay(Text("Invalid video URL").foregroundColor(.secondary))
                             }
 
-                            Text(items[index].components(separatedBy: "/").last ?? "Audio")
-                                .lineLimit(1)
-                                .truncationMode(.middle)
+                        case .sounds:
+                            VStack(spacing: 12) {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.gray.opacity(0.12))
+                                    .frame(height: 120)
+                                    .overlay(
+                                        Image(systemName: "waveform.circle.fill")
+                                            .font(.system(size: 48))
+                                            .foregroundColor(.green)
+                                    )
+
+                                HStack(spacing: 20) {
+                                    Button(action: toggleAudio) {
+                                        Image(systemName: isPlayingAudio ? "pause.circle.fill" : "play.circle.fill")
+                                            .font(.system(size: 44))
+                                    }
+
+                                    Text(items[index].components(separatedBy: "/").last ?? "Audio")
+                                        .lineLimit(1)
+                                        .truncationMode(.middle)
+                                }
+                            }
                         }
                     }
+                    .id(index)
+                    .transition(transition)
+                    .animation(.spring(), value: index)
                 }
             }
 
             HStack(spacing: 40) {
+                let prevEnabled = !(items.isEmpty || index == 0)
+                let nextEnabled = !(items.isEmpty || index >= items.count - 1)
+
                 Button(action: prev) {
                     Label("Previous", systemImage: "chevron.left")
+                        .frame(minWidth: 100)
                 }
-                .disabled(items.isEmpty || index == 0)
+                .disabled(!prevEnabled)
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 20).fill(Color.green.opacity(0.6)))
+                .background(RoundedRectangle(cornerRadius: 20).fill(prevEnabled ? Theme.buttonGreen : Color.gray.opacity(0.35)))
+                .foregroundColor(prevEnabled ? .black : .secondary)
 
                 Button(action: next) {
                     Label("Next", systemImage: "chevron.right")
+                        .frame(minWidth: 100)
                 }
-                .disabled(items.isEmpty || index >= items.count - 1)
+                .disabled(!nextEnabled)
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 20).fill(Color.green.opacity(0.6)))
+                .background(RoundedRectangle(cornerRadius: 20).fill(nextEnabled ? Theme.buttonGreen : Color.gray.opacity(0.35)))
+                .foregroundColor(nextEnabled ? .black : .secondary)
             }
-            .foregroundColor(.black)
 
             Spacer()
         }
@@ -98,8 +125,8 @@ struct MediaView: View {
         .onDisappear { stopAll() }
     }
 
-    private func prev() { index = max(0, index - 1) }
-    private func next() { index = min((items.count - 1), index + 1) }
+    private func prev() { withAnimation(.spring()) { lastAction = -1; index = max(0, index - 1) } }
+    private func next() { withAnimation(.spring()) { lastAction = 1; index = min((items.count - 1), index + 1) } }
 
     private func prepareCurrent() {
         stopAll()

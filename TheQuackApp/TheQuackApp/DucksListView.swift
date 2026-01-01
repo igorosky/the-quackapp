@@ -1,20 +1,20 @@
 import SwiftUI
 
 struct DucksListView: View {
+    @StateObject private var store = DucksStore()
     @State private var searchText: String     = ""
     @State private var selectedRegion: Region = .all
-    private var ducks                         = Duck.sample
     
     var filteredDucks: [Duck] {
-        ducks.filter { duck in
+        store.ducks.filter { duck in
             let matchesSearch = searchText.isEmpty || duck.name.localizedCaseInsensitiveContains(searchText)
-            let matchesRegion = selectedRegion == .all || duck.region == selectedRegion
+            let matchesRegion = selectedRegion == .all || duck.regions.contains(selectedRegion)
             return matchesSearch && matchesRegion
         }
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             GeometryReader { geometry in
                 ZStack {
                     LinearGradient(gradient: Gradient(colors: [Theme.bgTop, Theme.bgBottom]), 
@@ -70,7 +70,17 @@ struct DucksListView: View {
                         // Scrollable content area
                         ScrollView(showsIndicators: true) {
                             VStack(spacing: 0) {
-                                if filteredDucks.isEmpty {
+                                if store.isLoading {
+                                    VStack(spacing: 12) {
+                                        ProgressView()
+                                            .scaleEffect(1.5)
+                                        Text("Loading ducks...")
+                                            .font(.headline)
+                                            .foregroundColor(.secondary.opacity(0.7))
+                                    }
+                                    .frame(maxWidth: .infinity, minHeight: 200)
+                                    .padding(.vertical, 20)
+                                } else if filteredDucks.isEmpty {
                                     VStack(spacing: 12) {
                                         Image(systemName: "magnifyingglass")
                                             .font(.system(size: 36, weight: .light))
@@ -113,7 +123,6 @@ struct DucksListView: View {
                         .frame(minHeight: geometry.size.height * 0.7)
                     }
                 }
-                .navigationBarHidden(true)
             }
         }
     }
@@ -139,7 +148,7 @@ struct DuckRow: View {
                         .italic()
                         .foregroundColor(.secondary)
                 }
-                Text(duck.region.rawValue)
+                Text(duck.regions.map { $0.rawValue }.joined(separator: ", "))
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
