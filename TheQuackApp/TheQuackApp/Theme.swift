@@ -1,3 +1,11 @@
+/**
+ * ******************************************************************************
+ * @file           : Theme.swift
+ * @author         : Alex Rogoziński
+ * @brief          : This file contains the color theme definitions for the app.
+ * ******************************************************************************
+ */
+
 import SwiftUI
 
 enum Theme {

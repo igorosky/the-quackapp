@@ -1,20 +1,21 @@
-//
-//  TheQuackAppApp.swift
-//  TheQuackApp
-//
-//  Created by stud on 20/10/2025.
-//
+/**
+ * *****************************************************************************
+ * @file           : TheQuackAppApp.swift
+ * @author         : Alex Rogoziński
+ * @brief          : This file contains the main entry point for TheQuackApp.
+ * *****************************************************************************
+ */
 
 import SwiftUI
 
 @main
 struct TheQuackAppApp: App {
-    @AppStorage("darkMode") private var darkMode = false
+    @ObservedObject private var settings = AppSettings.shared
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .preferredColorScheme(darkMode ? .dark : .light)
+                .preferredColorScheme(settings.darkMode ? .dark : .light)
         }
     }
 }
