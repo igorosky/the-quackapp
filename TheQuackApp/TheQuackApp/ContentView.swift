@@ -1,9 +1,11 @@
-//
-//  ContentView.swift
-//  TheQuackApp
-//
-//  Created by stud on 20/10/2025.
-//
+/**
+ * *****************************************************************************
+ * @file           : ContentView.swift
+ * @author         : Alex Rogoziński
+ * @brief          : This file contains the main content view that hosts the
+                     navigation stack for the app.
+ * *****************************************************************************
+ */
 
 import SwiftUI
 
@@ -13,8 +15,4 @@ struct ContentView: View {
             HomeView()
         }
     }
-}
-
-#Preview {
-    ContentView()
 }

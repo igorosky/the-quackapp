@@ -1,90 +1,109 @@
+/**
+ * ******************************************************************************
+ * @file           : MediaView.swift
+ * @author         : Alex Rogoziński
+ * @brief          : This file contains the UI view for displaying media
+                     (images, videos, sounds) related to a duck.
+ * ******************************************************************************
+ */
+
 import SwiftUI
 import AVKit
 import AVFoundation
 
 struct MediaView: View {
-    let title: String
-    let items: [String]
+    let title:     String
+    let items:     [String]
     let mediaType: DuckDetailView.MediaType
-    @State private var index: Int
 
-    @State private var avPlayer: AVPlayer?         = nil
-    @State private var audioPlayer: AVAudioPlayer? = nil
-    @State private var isPlayingAudio: Bool        = false
-    @State private var lastAction: Int = 0 // -1 previous, 1 next -> controls transition direction
+    @State private var index:          Int
+    @State private var avPlayer:       AVPlayer?      = nil
+    @State private var audioPlayer:    AVAudioPlayer? = nil
+    @State private var isPlayingAudio: Bool           = false
+
+    // -1 previous, 1 next -> controls transition direction
+    @State private var lastAction:     Int            = 0
 
     init(title: String, items: [String], mediaType: DuckDetailView.MediaType, startIndex: Int = 0) {
-        self.title = title
-        self.items = items
+        self.title     = title
+        self.items     = items
         self.mediaType = mediaType
         _index = State(initialValue: startIndex)
     }
 
     var body: some View {
-        VStack(spacing: 20) {
-            Text(title).font(.title2)
+        ZStack {
+            LinearGradient(colors: [Theme.bgTop, Theme.bgBottom], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
 
-            if items.isEmpty {
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(height: 220)
-                    .overlay(Text("No media available").foregroundColor(.secondary))
-            } else {
-                // animated media container
-                let insertion: AnyTransition = .move(edge: lastAction >= 0 ? .trailing : .leading).combined(with: .opacity)
-                let removal: AnyTransition = .move(edge: lastAction >= 0 ? .leading : .trailing).combined(with: .opacity)
-                let transition = AnyTransition.asymmetric(insertion: insertion, removal: removal)
+            VStack(spacing: 20) {
+                Text(title).font(.title2)
 
-                ZStack {
-                    // content keyed by index so transition runs on change
-                    Group {
-                        switch mediaType {
-                        case .images:
-                            MediaImage(imageNameOrURL: items[index])
-                                .frame(height: 320)
-                                .cornerRadius(16)
-                                .clipped()
+                if items.isEmpty {
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.gray.opacity(0.3))
+                        .frame(height: 220)
+                        .overlay(Text("No media available").foregroundColor(.secondary))
+                } 
+                else {
+                    // Animated media container
+                    let insertion: AnyTransition = .move(edge: lastAction >= 0 ? .trailing : .leading).combined(with: .opacity)
+                    let removal: AnyTransition   = .move(edge: lastAction >= 0 ? .leading : .trailing).combined(with: .opacity)
+                    let transition               = AnyTransition.asymmetric(insertion: insertion, removal: removal)
 
-                        case .videos:
-                            if let _ = URL(string: items[index]) {
-                                if let player = avPlayer {
-                                    VideoPlayer(player: player)
+                    ZStack {
+                        // Content keyed by index so transition runs on change
+                        Group {
+                            switch mediaType {
+                                case .images:
+                                    MediaImage(imageNameOrURL: items[index])
                                         .frame(height: 320)
-                                        .cornerRadius(12)
-                                } else {
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .fill(Color.gray.opacity(0.3))
-                                        .frame(height: 220)
-                                        .overlay(Text("Preparing video...").foregroundColor(.secondary))
-                                }
-                            } else {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .fill(Color.gray.opacity(0.3))
-                                    .frame(height: 220)
-                                    .overlay(Text("Invalid video URL").foregroundColor(.secondary))
-                            }
+                                        .cornerRadius(16)
+                                        .clipped()
 
-                        case .sounds:
-                            VStack(spacing: 12) {
-                                RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.gray.opacity(0.12))
-                                    .frame(height: 120)
-                                    .overlay(
-                                        Image(systemName: "waveform.circle.fill")
-                                            .font(.system(size: 48))
-                                            .foregroundColor(.green)
-                                    )
-
-                                HStack(spacing: 20) {
-                                    Button(action: toggleAudio) {
-                                        Image(systemName: isPlayingAudio ? "pause.circle.fill" : "play.circle.fill")
-                                            .font(.system(size: 44))
+                                case .videos:
+                                    if let _ = URL(string: items[index]) {
+                                        if let player = avPlayer {
+                                            VideoPlayer(player: player)
+                                                .frame(height: 320)
+                                                .cornerRadius(12)
+                                        } 
+                                        else {
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .fill(Color.gray.opacity(0.3))
+                                                .frame(height: 220)
+                                                .overlay(Text("Preparing video...").foregroundColor(.secondary))
+                                        }
+                                    } 
+                                    else {
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .fill(Color.gray.opacity(0.3))
+                                            .frame(height: 220)
+                                            .overlay(Text("Invalid video URL").foregroundColor(.secondary))
                                     }
 
-                                    Text(items[index].components(separatedBy: "/").last ?? "Audio")
-                                        .lineLimit(1)
-                                        .truncationMode(.middle)
-                                }
+                                case .sounds:
+                                    VStack(spacing: 12) {
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .fill(Color.gray.opacity(0.12))
+                                            .frame(height: 120)
+                                            .overlay(
+                                                Image(systemName: "waveform.circle.fill")
+                                                    .font(.system(size: 48))
+                                                    .foregroundColor(.green)
+                                            )
+
+                                        HStack(spacing: 20) {
+                                            Button(action: toggleAudio) {
+                                                Image(systemName: isPlayingAudio ? "pause.circle.fill" : "play.circle.fill")
+                                                    .font(.system(size: 44))
+                                            }
+
+                                            Text(items[index].components(separatedBy: "/").last ?? "Audio")
+                                                .lineLimit(1)
+                                                .truncationMode(.middle)
+                                        }
+                                    }   
                             }
                         }
                     }
@@ -94,6 +113,7 @@ struct MediaView: View {
                 }
             }
 
+            // Navigation buttons
             HStack(spacing: 40) {
                 let prevEnabled = !(items.isEmpty || index == 0)
                 let nextEnabled = !(items.isEmpty || index >= items.count - 1)
@@ -123,42 +143,58 @@ struct MediaView: View {
         .onAppear { prepareCurrent() }
         .onChange(of: index) { _, _ in prepareCurrent() }
         .onDisappear { stopAll() }
+        }
     }
 
-    private func prev() { withAnimation(.spring()) { lastAction = -1; index = max(0, index - 1) } }
-    private func next() { withAnimation(.spring()) { lastAction = 1; index = min((items.count - 1), index + 1) } }
+    private func prev() { 
+        withAnimation(.spring()) { 
+            lastAction = -1 
+            index = max(0, index - 1) 
+        }
+    }
+    
+    private func next() { 
+        withAnimation(.spring()) { 
+            lastAction = 1 
+            index = min((items.count - 1), index + 1) 
+        } 
+    }
 
     private func prepareCurrent() {
         stopAll()
         guard !items.isEmpty else { return }
         let current = items[index]
         switch mediaType {
-        case .images:
-            break
-        case .videos:
-            if let url = URL(string: current) {
-                avPlayer = AVPlayer(url: url)
-                // don't autoplay here; VideoPlayer will control playback
-            }
-        case .sounds:
-            // attempt to load audio (supports remote URLs by downloading data)
-            if let url = URL(string: current) {
-                if url.isFileURL {
-                    do {
-                        audioPlayer = try AVAudioPlayer(contentsOf: url)
-                        audioPlayer?.prepareToPlay()
-                    } catch {
-                        audioPlayer = nil
-                    }
-                } else {
-                    // download
+            case .images:
+                break
+            case .videos:
+                if let url = URL(string: current) {
+                    avPlayer = AVPlayer(url: url)
+                    // Don't autoplay here, VideoPlayer will control playback
+                }
+            case .sounds:
+                // Attempt to load audio (supports remote URLs by downloading data)
+                if let url = URL(string: current) {
+                    if url.isFileURL {
+                        do {
+                            audioPlayer = try AVAudioPlayer(contentsOf: url)
+                            audioPlayer?.prepareToPlay()
+                        } 
+                        catch {
+                            audioPlayer = nil
+                        }
+                    } 
+                } 
+                else {
+                    // Download
                     URLSession.shared.dataTask(with: url) { data, _, _ in
                         guard let data = data else { return }
                         DispatchQueue.main.async {
                             do {
                                 audioPlayer = try AVAudioPlayer(data: data)
                                 audioPlayer?.prepareToPlay()
-                            } catch {
+                            } 
+                            catch {
                                 audioPlayer = nil
                             }
                         }
@@ -174,7 +210,8 @@ struct MediaView: View {
             if player.isPlaying {
                 player.pause()
                 isPlayingAudio = false
-            } else {
+            } 
+            else {
                 player.play()
                 isPlayingAudio = true
             }
@@ -183,19 +220,9 @@ struct MediaView: View {
 
     private func stopAll() {
         avPlayer?.pause()
-        avPlayer = nil
+        avPlayer       = nil
         audioPlayer?.stop()
-        audioPlayer = nil
+        audioPlayer    = nil
         isPlayingAudio = false
-    }
-}
-
-struct MediaView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            MediaView(title: "Images", items: ["https://via.placeholder.com/600", "https://via.placeholder.com/400"], mediaType: .images, startIndex: 0)
-            MediaView(title: "Videos", items: ["https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4"], mediaType: .videos, startIndex: 0)
-            MediaView(title: "Sounds", items: ["https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3"], mediaType: .sounds, startIndex: 0)
-        }
     }
 }

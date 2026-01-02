@@ -1,8 +1,15 @@
+/**
+ * *****************************************************************************
+ * @file           : SettingsView.swift
+ * @author         : Alex Rogoziński
+ * @brief          : This file contains the UI view for the app settings screen.
+ * *****************************************************************************
+ */
+
 import SwiftUI
 
 struct SettingsView: View {
-    @ObservedObject private var settings         = AppSettings.shared
-    @AppStorage("darkMode") private var darkMode = false
+    @ObservedObject private var settings = AppSettings.shared
 
     var body: some View {
         ZStack {
@@ -11,6 +18,7 @@ struct SettingsView: View {
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
+                     // View title
                     Text("Settings")
                         .font(.largeTitle.weight(.bold))
                         .foregroundColor(.white)
@@ -18,18 +26,18 @@ struct SettingsView: View {
                         .padding(.horizontal)
                         .padding(.top, 8)
 
+                    // Display options
                     VStack(spacing: 16) {
                         Text("Display").font(.title2).bold()
-                        Toggle(isOn: Binding(get: { settings.showScientificNames }, set: { settings.showScientificNames = $0 })) {
-                            Text("Scientific names")
-                        }
+                        Toggle("Scientific names", isOn: Binding(get: { settings.showScientificNames }, set: { settings.showScientificNames = $0 }))
                         Divider()
-                        Toggle("Dark mode", isOn: $darkMode)
+                        Toggle("Dark mode", isOn: Binding(get: { settings.darkMode }, set: { settings.darkMode = $0 }))
                     }
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 20).fill(Theme.cardBackground))
                     .padding(.horizontal)
 
+                    // Information section
                     VStack(spacing: 16) {
                         Text("Information").font(.title2).bold()
                         HStack {
@@ -39,7 +47,7 @@ struct SettingsView: View {
                         }
                         Divider()
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("[DEV] Ducks server URL").font(.subheadline).bold()
+                            Text("[DEV] Ducks server URL")
                             TextField("http://localhost/", text: Binding(get: { settings.serverBaseURL }, set: { settings.serverBaseURL = $0 }))
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .keyboardType(.URL)
@@ -56,8 +64,4 @@ struct SettingsView: View {
             }
         }
     }
-}
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View { SettingsView() }
 }

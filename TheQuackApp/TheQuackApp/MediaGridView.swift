@@ -1,3 +1,12 @@
+/**
+ * *****************************************************************************
+ * @file           : MediaGridView.swift
+ * @author         : Alex Rogoziński
+ * @brief          : This file contains the UI view for displaying a grid of 
+                     media items (images, videos, sounds) for a specific duck.
+ * *****************************************************************************
+ */
+
 import SwiftUI
 
 struct MediaGridView: View {
@@ -7,9 +16,9 @@ struct MediaGridView: View {
     
     var items: [String] {
         switch mediaType {
-        case .images: return duck.images
-        case .videos: return duck.videos
-        case .sounds: return duck.sounds
+            case .images: return duck.images
+            case .videos: return duck.videos
+            case .sounds: return duck.sounds
         }
     }
     
@@ -18,6 +27,7 @@ struct MediaGridView: View {
             LinearGradient(colors: [Theme.bgTop, Theme.bgBottom], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
+            // Scrollable grid of media items
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     Text(mediaType.rawValue)
@@ -29,7 +39,7 @@ struct MediaGridView: View {
                     if items.isEmpty {
                         VStack(spacing: 12) {
                             Image(systemName: mediaType == .images ? "photo.on.rectangle" : 
-                                             mediaType == .videos ? "play.rectangle" : "waveform")
+                                              mediaType == .videos ? "play.rectangle" : "waveform")
                                 .font(.system(size: 40))
                                 .foregroundColor(.secondary)
                             Text("No \(mediaType.rawValue.lowercased()) available")
@@ -37,17 +47,19 @@ struct MediaGridView: View {
                         }
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(.top, 60)
-                    } else {
+                    } 
+                    else {
                         LazyVGrid(columns: columns, spacing: 16) {
                             ForEach(Array(items.enumerated()), id: \.element) { index, item in
                                 NavigationLink(destination: MediaView(title: mediaType.rawValue, items: items, mediaType: mediaType, startIndex: index)) {
-                                    // show thumbnail for images, and generic icon for other media types
-                                        if mediaType == .images {
-                                            MediaImage(imageNameOrURL: item)
-                                                .frame(height: 140)
-                                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                                                .clipped()
-                                    } else {
+                                    // Show thumbnail for images and generic icon for other media types
+                                    if mediaType == .images {
+                                        MediaImage(imageNameOrURL: item)
+                                            .frame(height: 140)
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                                            .clipped()
+                                    } 
+                                    else {
                                         MediaItemView(mediaType: mediaType)
                                     }
                                 }
@@ -74,18 +86,12 @@ struct MediaItemView: View {
                         .fill(Theme.bgBottom.opacity(0.8))
                         .overlay(
                             Image(systemName: mediaType == .images ? "photo" :
-                                             mediaType == .videos ? "play.circle.fill" : "speaker.wave.2.circle.fill")
+                                              mediaType == .videos ? "play.circle.fill" : "speaker.wave.2.circle.fill")
                                 .font(.system(size: 30))
                                 .foregroundColor(.white)
                         )
                 }
                 .padding(8)
             )
-    }
-}
-
-struct MediaGridView_Previews: PreviewProvider {
-    static var previews: some View {
-        MediaGridView(duck: Duck.sample[0], mediaType: .images)
     }
 }

@@ -1,3 +1,12 @@
+/**
+ * *****************************************************************************
+ * @file           : DuckDetailView.swift
+ * @author         : Alex Rogoziński
+ * @brief          : This file contains the UI view for displaying detailed
+                     information about a specific duck, including its media.
+ * *****************************************************************************
+ */
+
 import SwiftUI
 
 struct DuckDetailView: View {
@@ -26,12 +35,10 @@ struct DuckDetailView: View {
                         .padding(.horizontal)
                         .padding(.top, 8)
 
-                                    // media type buttons
+                    // Media type selection buttons
                     HStack(spacing: 12) {
                         ForEach(MediaType.allCases) { type in
-                            Button(action: {
-                                selectedMediaType = type
-                            }) {
+                            Button(action: { selectedMediaType = type }) {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 20)
                                         .fill(Theme.buttonGreen)
@@ -54,12 +61,20 @@ struct DuckDetailView: View {
                         MediaGridView(duck: duck, mediaType: type)
                     }
 
-                    VStack(spacing: 12) {
+                    VStack(spacing: 0) {
+                        // Duck image
                         MediaImage(imageNameOrURL: duck.images.first)
                             .frame(height: 200)
-                            .cornerRadius(20)
+                            .frame(maxWidth: .infinity)
                             .clipped()
+                            .clipShape(UnevenRoundedRectangle(cornerRadii: .init(
+                                topLeading: 24,
+                                bottomLeading: 0,
+                                bottomTrailing: 0,
+                                topTrailing: 24
+                            )))
 
+// Duck details         // Duck details
                         VStack(alignment: .leading, spacing: 8) {
                             Text(duck.name).font(.title).bold()
                             if settings.showScientificNames, let sci = duck.scientificName {
@@ -91,17 +106,13 @@ struct DuckDetailView: View {
                             }
                         }
                         .padding()
-                        .background(Theme.cardBackground)
-                        .cornerRadius(24)
-                        .padding(.horizontal)
                     }
+                    .background(Theme.cardBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                    .padding(.horizontal)
                     .padding(.bottom, 40)
                 }
             }
         }
     }
-}
-
-struct DuckDetailView_Previews: PreviewProvider {
-    static var previews: some View { DuckDetailView(duck: Duck.sample[0]) }
 }

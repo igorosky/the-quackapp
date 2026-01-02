@@ -1,3 +1,12 @@
+/**
+ * ******************************************************************************
+ * @file           : DucksListView.swift
+ * @author         : Alex Rogoziński
+ * @brief          : This file contains the UI view for displaying a list of
+                     ducks with search and region filtering capabilities.
+ * ******************************************************************************
+ */
+
 import SwiftUI
 
 struct DucksListView: View {
@@ -35,6 +44,7 @@ struct DucksListView: View {
                                 Image(systemName: "magnifyingglass")
                                     .foregroundColor(.gray)
                                 TextField("Enter duck's name...", text: $searchText)
+
                                 if !searchText.isEmpty {
                                     Button(action: { searchText = "" }) {
                                         Image(systemName: "xmark.circle.fill")
@@ -46,7 +56,7 @@ struct DucksListView: View {
                             .background(RoundedRectangle(cornerRadius: 20).fill(Theme.searchBackground))
                         }
                         .padding([.horizontal, .top])
-                        .padding(.bottom, 16)  // Add space after the search bar
+                        .padding(.bottom, 16)
                         
                         // Region picker in connected white container
                         HStack {
@@ -80,7 +90,8 @@ struct DucksListView: View {
                                     }
                                     .frame(maxWidth: .infinity, minHeight: 200)
                                     .padding(.vertical, 20)
-                                } else if filteredDucks.isEmpty {
+                                } 
+                                else if filteredDucks.isEmpty {
                                     VStack(spacing: 12) {
                                         Image(systemName: "magnifyingglass")
                                             .font(.system(size: 36, weight: .light))
@@ -95,7 +106,8 @@ struct DucksListView: View {
                                     }
                                     .frame(maxWidth: .infinity, minHeight: 200)
                                     .padding(.vertical, 20)
-                                } else {
+                                } 
+                                else {
                                     VStack(spacing: 0) {
                                         ForEach(filteredDucks) { duck in
                                             NavigationLink(destination: DuckDetailView(duck: duck)) {
@@ -129,10 +141,10 @@ struct DucksListView: View {
 }
     
 
-
 struct DuckRow: View {
     let duck: Duck
     @ObservedObject private var settings = AppSettings.shared
+
     var body: some View {
         HStack(spacing: 16) {
             MediaImage(imageNameOrURL: duck.images.first)
@@ -142,12 +154,14 @@ struct DuckRow: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(duck.name).font(.headline)
+
                 if settings.showScientificNames, let sci = duck.scientificName {
                     Text(sci)
                         .font(.subheadline)
                         .italic()
                         .foregroundColor(.secondary)
                 }
+
                 Text(duck.regions.map { $0.rawValue }.joined(separator: ", "))
                     .font(.subheadline)
                     .foregroundColor(.secondary)
@@ -158,16 +172,13 @@ struct DuckRow: View {
     }
 }
 
-struct DucksListView_Previews: PreviewProvider {
-    static var previews: some View { DucksListView() }
-}
-
 // Extension for custom corner rounding
 extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape(RoundedCorner(radius: radius, corners: corners))
     }
 }
+
 
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
