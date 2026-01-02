@@ -13,6 +13,8 @@ final class DuckOfTheDay: ObservableObject {
     private func todayString() -> String {
         let fmt = DateFormatter()
         fmt.dateFormat = "yyyy-MM-dd"
+        fmt.timeZone = TimeZone.current
+        fmt.locale = Locale(identifier: "en_US_POSIX")
         return fmt.string(from: Date())
     }
 

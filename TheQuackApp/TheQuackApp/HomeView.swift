@@ -2,7 +2,6 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject private var duckOfTheDay = DuckOfTheDay.shared
-    private let fallbackDuck = Duck.sample.first!
     @StateObject private var store = DucksStore()
 
     var body: some View {
@@ -31,8 +30,8 @@ struct HomeView: View {
 
                     VStack(spacing: 16) {
                         Text("Duck of the day")
-                            .font(.title2)
-                            .foregroundColor(.primary)
+                            .font(.system(size: 22, weight: .semibold))
+                            .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         // ensure we have a selection for today when this view appears
                         Color.clear.onAppear {
@@ -41,46 +40,91 @@ struct HomeView: View {
                         .onReceive(store.$ducks) { ducks in
                             DuckOfTheDay.shared.updateIfNeeded(from: ducks)
                         }
-                        // big card
-                        ZStack(alignment: .bottom) {
-                            RoundedRectangle(cornerRadius: 28)
-                                .fill(Theme.cardBackground.opacity(0.98))
-                                .frame(height: 300)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 28)
-                                        .stroke(Color.black.opacity(0.02))
-                                )
-
-                            VStack(spacing: 8) {
-                                MediaImage(imageNameOrURL: (duckOfTheDay.currentDuck ?? fallbackDuck).images.first)
-                                    .frame(height: 200)
-                                    .cornerRadius(20)
-                                    .overlay(Text("[Image of a duck]").foregroundColor(.white).opacity(0))
-
-                                VStack(alignment: .leading, spacing: 6) {
-                                    let shown = duckOfTheDay.currentDuck ?? fallbackDuck
-                                    Text(shown.name)
-                                        .font(.title3).bold()
-                                    Text(shown.shortDescription)
+                        // Display duck card or loading/empty state
+                        if store.isLoading {
+                            ZStack(alignment: .bottom) {
+                                RoundedRectangle(cornerRadius: 28)
+                                    .fill(Theme.cardBackground.opacity(0.98))
+                                    .frame(height: 300)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 28)
+                                            .stroke(Color.black.opacity(0.02))
+                                    )
+                                
+                                VStack(spacing: 12) {
+                                    ProgressView()
+                                        .scaleEffect(1.5)
+                                    Text("Loading duck...")
                                         .font(.subheadline)
-                                        .foregroundColor(.secondary)
+                                        .foregroundColor(.secondary.opacity(0.7))
                                 }
-                                .padding(.horizontal)
-                                .padding(.bottom, 8)
-                                .background(Theme.cardBackground)
-                                .cornerRadius(14)
-                                .padding(.horizontal, 30)
+                                .frame(maxWidth: .infinity, minHeight: 300)
                             }
-                            .padding(.bottom, 8)
-                        }
+                        } else if let duck = duckOfTheDay.currentDuck {
+                            // big card
+                            ZStack(alignment: .bottom) {
+                                RoundedRectangle(cornerRadius: 28)
+                                    .fill(Theme.cardBackground.opacity(0.98))
+                                    .frame(height: 300)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 28)
+                                            .stroke(Color.black.opacity(0.02))
+                                    )
 
-                        NavigationLink(destination: DuckDetailView(duck: duckOfTheDay.currentDuck ?? fallbackDuck)) {
-                            Text("Check details")
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 16)
-                                .background(RoundedRectangle(cornerRadius: 24).fill(Theme.buttonGreen))
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 24)
+                                VStack(spacing: 8) {
+                                    MediaImage(imageNameOrURL: duck.images.first)
+                                        .frame(height: 200)
+                                        .cornerRadius(20)
+                                        .overlay(Text("[Image of a duck]").foregroundColor(.white).opacity(0))
+
+                                    VStack(alignment: .leading, spacing: 6) {
+                                        Text(duck.name)
+                                            .font(.title3).bold()
+                                        Text(duck.shortDescription)
+                                            .font(.subheadline)
+                                            .foregroundColor(.secondary)
+                                    }
+                                    .padding(.horizontal)
+                                    .padding(.bottom, 8)
+                                    .background(Theme.cardBackground)
+                                    .cornerRadius(14)
+                                    .padding(.horizontal, 30)
+                                }
+                                .padding(.bottom, 8)
+                            }
+
+                            NavigationLink(destination: DuckDetailView(duck: duck)) {
+                                Text("Check details")
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 16)
+                                    .background(RoundedRectangle(cornerRadius: 24).fill(Theme.buttonGreen))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 24)
+                            }
+                        } else {
+                            ZStack(alignment: .bottom) {
+                                RoundedRectangle(cornerRadius: 28)
+                                    .fill(Theme.cardBackground.opacity(0.98))
+                                    .frame(height: 300)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 28)
+                                            .stroke(Color.black.opacity(0.02))
+                                    )
+                                
+                                VStack(spacing: 12) {
+                                    Image(systemName: "bird.fill")
+                                        .font(.system(size: 36, weight: .light))
+                                        .foregroundColor(.secondary.opacity(0.7))
+                                    Text("No ducks available")
+                                        .font(.headline)
+                                        .foregroundColor(.secondary.opacity(0.7))
+                                    Text("Please check your server connection")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary.opacity(0.5))
+                                        .multilineTextAlignment(.center)
+                                }
+                                .frame(maxWidth: .infinity, minHeight: 300)
+                            }
                         }
                     }
                     .padding(.horizontal)

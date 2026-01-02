@@ -92,7 +92,7 @@ final class DucksStore: ObservableObject {
         func tryCandidate(_ index: Int) {
             guard index < candidatePaths.count else {
                 DispatchQueue.main.async {
-                    self.ducks = Duck.sample
+                    self.ducks = []
                     self.isLoading = false
                 }
                 return
@@ -162,11 +162,7 @@ final class DucksStore: ObservableObject {
                     }
 
                     group.notify(queue: .main) {
-                        if !loaded.isEmpty {
-                            self.ducks = loaded
-                        } else {
-                            self.ducks = Duck.sample
-                        }
+                        self.ducks = loaded
                         self.isLoading = false
                     }
                 } catch {
