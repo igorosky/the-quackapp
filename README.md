@@ -10,8 +10,7 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 - **Beautiful Gradients**: Eye-catching gradient backgrounds with enhanced text visibility in both light and dark modes
 
 #### Home Screen Screenshot
-![Home Screen Screenshot]()
-
+![Home Screen Screenshot](https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_home.png)
 
 ### Duck Discovery
 - **Smart Search**: Search ducks by name with real-time filtering
@@ -26,7 +25,7 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 - **Comprehensive List View**: Browse all available duck species with images and regional information
 
 #### Duck Discovery Screenshot
-![Duck Discovery Screenshot]()
+![Duck Discovery Screenshot](https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_search.png)
 
 ### Duck Details
 - **Rich Media Gallery**: View images, videos, and sounds for each duck species
@@ -39,10 +38,10 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 - **Media Grid View**: Browse all media in an organized grid layout
   
 #### Duck Details Screenshot
-![Duck Details Screenshot]()
+![Duck Details Screenshot](https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_settings.png)
 
 #### Duck Images Grid Screenshot
-![Duck Images Grid Screenshot]()
+![Duck Images Grid Screenshot](https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_mediagrid.png)
 
 ### Settings
 - **Server Configuration**: Configure custom server URL for duck data
