@@ -31,6 +31,8 @@ struct DuckDetailView: View {
                     Text(duck.name)
                         .font(.largeTitle.weight(.bold))
                         .foregroundColor(.white)
+                        .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 2)
+                        .shadow(color: .black.opacity(0.2), radius: 1, x: 0, y: 1)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
                         .padding(.top, 8)
@@ -67,12 +69,6 @@ struct DuckDetailView: View {
                             .frame(height: 200)
                             .frame(maxWidth: .infinity)
                             .clipped()
-                            .clipShape(UnevenRoundedRectangle(cornerRadii: .init(
-                                topLeading: 24,
-                                bottomLeading: 0,
-                                bottomTrailing: 0,
-                                topTrailing: 24
-                            )))
 
 // Duck details         // Duck details
                         VStack(alignment: .leading, spacing: 8) {

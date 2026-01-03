@@ -1,10 +1,10 @@
 /**
- * ******************************************************************************
+ * *****************************************************************************
  * @file           : DucksListView.swift
  * @author         : Alex Rogoziński
  * @brief          : This file contains the UI view for displaying a list of
                      ducks with search and region filtering capabilities.
- * ******************************************************************************
+ * *****************************************************************************
  */
 
 import SwiftUI
@@ -37,6 +37,8 @@ struct DucksListView: View {
                             Text("Discover Ducks")
                                 .font(.system(size: 34, weight: .bold))
                                 .foregroundColor(.white)
+                                .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 2)
+                                .shadow(color: .black.opacity(0.2), radius: 1, x: 0, y: 1)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.top)
                             
@@ -73,7 +75,12 @@ struct DucksListView: View {
                         .padding()
                         .background(Theme.cardBackground)
                         .clipShape(
-                            RoundedCorner(radius: 30, corners: [.topLeft, .topRight])
+                            UnevenRoundedRectangle(cornerRadii: .init(
+                                topLeading: 30,
+                                bottomLeading: 0,
+                                bottomTrailing: 0,
+                                topTrailing: 30
+                            ))
                         )
                         .padding(.horizontal)
                         
@@ -128,7 +135,12 @@ struct DucksListView: View {
                             }
                             .background(Theme.cardBackground)
                             .clipShape(
-                                RoundedCorner(radius: 30, corners: [.bottomLeft, .bottomRight])
+                                UnevenRoundedRectangle(cornerRadii: .init(
+                                    topLeading: 0,
+                                    bottomLeading: 30,
+                                    bottomTrailing: 30,
+                                    topTrailing: 0
+                                ))
                             )
                             .padding(.horizontal)
                         }
@@ -169,23 +181,5 @@ struct DuckRow: View {
             Spacer()
         }
         .padding(.vertical, 12)
-    }
-}
-
-// Extension for custom corner rounding
-extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape(RoundedCorner(radius: radius, corners: corners))
-    }
-}
-
-
-struct RoundedCorner: Shape {
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
-
-    func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
     }
 }

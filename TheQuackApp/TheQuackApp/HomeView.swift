@@ -24,6 +24,8 @@ struct HomeView: View {
                     Text("TheQuackApp")
                         .font(.title2).bold()
                         .foregroundColor(.white)
+                        .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 2)
+                        .shadow(color: .black.opacity(0.2), radius: 1, x: 0, y: 1)
                     Spacer()
                     NavigationLink(destination: SettingsView()) {
                         Image(systemName: "gearshape.fill")
@@ -38,6 +40,8 @@ struct HomeView: View {
                 Text("Hello, Ornithologist!")
                     .font(.system(size: 50, weight: .bold))
                     .foregroundColor(.white)
+                    .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 2)
+                    .shadow(color: .black.opacity(0.2), radius: 1, x: 0, y: 1)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
 
@@ -46,6 +50,8 @@ struct HomeView: View {
                     Text("Duck of the day")
                         .font(.system(size: 22, weight: .semibold))
                         .foregroundColor(.white)
+                        .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 2)
+                        .shadow(color: .black.opacity(0.2), radius: 1, x: 0, y: 1)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     // Ensure there is a selection for today when this view appears
@@ -84,12 +90,6 @@ struct HomeView: View {
                                     .frame(height: 230)
                                     .frame(maxWidth: .infinity)
                                     .clipped()
-                                    .clipShape(UnevenRoundedRectangle(cornerRadii: .init(
-                                        topLeading: 28,
-                                        bottomLeading: 0,
-                                        bottomTrailing: 0,
-                                        topTrailing: 28
-                                    )))
 
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(duck.name)

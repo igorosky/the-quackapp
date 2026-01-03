@@ -22,6 +22,8 @@ struct SettingsView: View {
                     Text("Settings")
                         .font(.largeTitle.weight(.bold))
                         .foregroundColor(.white)
+                        .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 2)
+                        .shadow(color: .black.opacity(0.2), radius: 1, x: 0, y: 1)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
                         .padding(.top, 8)
