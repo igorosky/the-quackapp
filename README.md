@@ -10,7 +10,7 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 - **Beautiful Gradients**: Eye-catching gradient backgrounds with enhanced text visibility in both light and dark modes
 
 #### Home Screen Screenshot
-<img src="https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_home.png" alt="Home Screen Screenshot" width="50%"/>
+<img src="https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_home.png" alt="Home Screen Screenshot" width="30%"/>
 
 ### Duck Discovery
 - **Smart Search**: Search ducks by name with real-time filtering
@@ -25,7 +25,7 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 - **Comprehensive List View**: Browse all available duck species with images and regional information
 
 #### Duck Discovery Screenshot
-<img src="https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_search.png" alt="Duck Discovery Screenshot" width="50%"/>
+<img src="https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_search.png" alt="Duck Discovery Screenshot" width="30%"/>
 
 ### Duck Details
 - **Rich Media Gallery**: View images, videos, and sounds for each duck species
@@ -38,10 +38,10 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 - **Media Grid View**: Browse all media in an organized grid layout
   
 #### Duck Details Screenshot
-<img src="https://github.com/igorosky/the-quackapp/blob/518d060b05b665405334f8f493b74257d241e7c4/screenshots/ss_details.png" alt="Duck Details Screenshot" width="50%"/>
+<img src="https://github.com/igorosky/the-quackapp/blob/518d060b05b665405334f8f493b74257d241e7c4/screenshots/ss_details.png" alt="Duck Details Screenshot" width="30%"/>
 
 #### Duck Images Grid Screenshot
-<img src="https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_mediagrid.png" alt="Duck Images Grid Screenshot" width="50%"/>
+<img src="https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_mediagrid.png" alt="Duck Images Grid Screenshot" width="30%"/>
 
 ### Settings
 - **Server Configuration**: Configure custom server URL for duck data
@@ -51,9 +51,9 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 
 #### Settings Screenshot
 Dark mode
-<img src="https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_settings.png" alt="Settings Screenshot Dark mode" width="50%"/>
+<img src="https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_settings.png" alt="Settings Screenshot Dark mode" width="30%"/>
 Light mode
-<img src="https://github.com/igorosky/the-quackapp/blob/02a557bfedd31640ebd5287fb3b866425047fda5/screenshots/ss_settings_light.png" alt="Home Screen Screenshot Light mode" width="50%"/>
+<img src="https://github.com/igorosky/the-quackapp/blob/02a557bfedd31640ebd5287fb3b866425047fda5/screenshots/ss_settings_light.png" alt="Home Screen Screenshot Light mode" width="30%"/>
 
 ## Technical Stack
 
