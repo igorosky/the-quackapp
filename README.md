@@ -78,20 +78,28 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 
 ```
 TheQuackApp/
-├── TheQuackAppApp.swift        # Main app entry point
-├── ContentView.swift           # Root navigation view
-├── HomeView.swift              # Home screen with Duck of the Day
-├── DucksListView.swift         # Search and browse ducks
-├── DuckDetailView.swift        # Detailed duck information
-├── MediaView.swift             # Media player view
-├── MediaGridView.swift         # Media gallery grid
-├── SettingsView.swift          # App settings
-├── Models.swift                # Data models and network layer
-├── AppSettings.swift           # User preferences manager
-├── Theme.swift                 # Color theme definitions
-├── DuckOfTheDay.swift          # Daily duck rotation logic
-├── MediaImage.swift            # Async image loader component
-└── Assets.xcassets/            # App assets and colors
+├── App/
+│   └── TheQuackAppApp.swift        # Main app entry point
+├── Views/
+│   ├── Home/
+│   │   ├── HomeView.swift          # Home screen with Duck of the Day
+│   │   └── DuckOfTheDay.swift      # Daily duck rotation logic
+│   ├── Ducks/
+│   │   ├── DucksListView.swift     # Search and browse ducks
+│   │   ├── DuckDetailView.swift    # Detailed duck information
+│   │   └── MediaGridView.swift     # Media gallery grid
+│   ├── Media/
+│   │   ├── MediaView.swift         # Media player view
+│   │   └── MediaImage.swift        # Async image loader component
+│   ├── Settings/
+│   │   └── SettingsView.swift      # App settings
+│   └── ContentView.swift           # Root navigation view
+├── Models/
+│   ├── Models.swift                # Data models and network layer
+│   └── AppSettings.swift           # User preferences manager
+├── Theme/
+│   └── Theme.swift                 # Color theme definitions
+└── Assets.xcassets/                # App assets and colors
 ```
 
 ## Key Components

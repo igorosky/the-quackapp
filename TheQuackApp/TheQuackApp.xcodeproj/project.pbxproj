@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		A180E1D92EA671480087F87D /* TheQuackApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheQuackApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A180E1D92EA671480087F87D /* TheQuackApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = TheQuackApp.app; path = "/Users/alexrogozinski/XCode/the-quack-app/the-quackapp/TheQuackApp/build/Debug-iphoneos/TheQuackApp.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -33,16 +33,7 @@
 			isa = PBXGroup;
 			children = (
 				A180E1DB2EA671480087F87D /* TheQuackApp */,
-				A180E1DA2EA671480087F87D /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		A180E1DA2EA671480087F87D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A180E1D92EA671480087F87D /* TheQuackApp.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,7 +86,7 @@
 			mainGroup = A180E1D02EA671480087F87D;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = A180E1DA2EA671480087F87D /* Products */;
+			productRefGroup = A180E1D02EA671480087F87D;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
