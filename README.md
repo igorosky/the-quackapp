@@ -60,7 +60,8 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 #### Settings Screenshots
 <p align="center">
   <img src="https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_settings.png" alt="Settings Screenshot Dark mode" width="30%"/>
-  <img src="https://github.com/igorosky/the-quackapp/blob/02a557bfedd31640ebd5287fb3b866425047fda5/screenshots/ss_settings_light.png" alt="Settings Screenshot Light mode" width="30%"/>
+  &nbsp;&nbsp;
+  <img src="https://github.com/igorosky/the-quackapp/blob/e02aea68b8f763d8f88458a271659f5715158cc5/screenshots/ss_settings_light.png" alt="Settings Screenshot Light mode" width="30%"/>
   <br>
   <em>Dark mode (left) and Light mode (right)</em>
 </p>
