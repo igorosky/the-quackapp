@@ -4,6 +4,8 @@
 
 ## User settings
 xcuserdata/
+*.xcuserstate
+*.perspectivev3
 
 ## Obj-C/Swift specific
 *.hmap
@@ -12,6 +14,12 @@ xcuserdata/
 *.ipa
 *.dSYM.zip
 *.dSYM
+
+## Build outputs
+DerivedData/
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
 
 ## Playgrounds
 timeline.xctimeline
@@ -30,6 +38,9 @@ playground.xcworkspace
 # .swiftpm
 
 .build/
+
+# Swift Package Manager user data
+.swiftpm/xcode/
 
 # CocoaPods
 #
