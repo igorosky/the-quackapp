@@ -33,6 +33,8 @@ struct MediaGridView: View {
                     Text(mediaType.rawValue)
                         .font(.largeTitle.weight(.bold))
                         .foregroundColor(.white)
+                        .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 2)
+                        .shadow(color: .black.opacity(0.2), radius: 1, x: 0, y: 1)
                         .padding(.horizontal)
                         .padding(.top, 8)
                     
