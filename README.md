@@ -9,6 +9,10 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 - **Quick Navigation**: Easy access to duck search and app settings
 - **Beautiful Gradients**: Eye-catching gradient backgrounds with enhanced text visibility in both light and dark modes
 
+#### Home Screen Screenshot
+![Home Screen Screenshot]()
+
+
 ### Duck Discovery
 - **Smart Search**: Search ducks by name with real-time filtering
 - **Region Filtering**: Filter ducks by geographical regions:
@@ -21,6 +25,9 @@ A SwiftUI iOS application for exploring and learning about different duck specie
   - Antarctica
 - **Comprehensive List View**: Browse all available duck species with images and regional information
 
+#### Duck Discovery Screenshot
+![Duck Discovery Screenshot]()
+
 ### Duck Details
 - **Rich Media Gallery**: View images, videos, and sounds for each duck species
 - **Detailed Information**: 
@@ -30,12 +37,21 @@ A SwiftUI iOS application for exploring and learning about different duck specie
   - "Find This Bird" section with habitat and identification tips
 - **Interactive Media Player**: Built-in audio and video playback capabilities
 - **Media Grid View**: Browse all media in an organized grid layout
+  
+#### Duck Details Screenshot
+![Duck Details Screenshot]()
+
+#### Duck Images Grid Screenshot
+![Duck Images Grid Screenshot]()
 
 ### Settings
 - **Server Configuration**: Configure custom server URL for duck data
 - **Scientific Names**: Toggle display of scientific names throughout the app
 - **Dark Mode**: Switch between light and dark themes
 - **Persistent Preferences**: All settings are saved locally
+
+#### Settings Screenshot
+![Settings Screenshot]()
 
 ## Technical Stack
 
@@ -144,7 +160,3 @@ Media files should be accessible via relative URLs from the base server URL.
 ## License
 
 *[to be specified]*
-
-## Acknowledgments
-
-Duck data and media sourced from [The Cornell Lab of Ornithology](https://www.allaboutbirds.org/guide/browse/shape/Ducks).
