@@ -50,7 +50,10 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 - **Persistent Preferences**: All settings are saved locally
 
 #### Settings Screenshot
-<img src="https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_settings.png" alt="Settings Screenshot" width="50%"/>
+Dark mode
+<img src="https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_settings.png" alt="Settings Screenshot Dark mode" width="50%"/>
+Light mode
+<img src="https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_settings_light.png" alt="Home Screen Screenshot Light mode" width="50%"/>
 
 ## Technical Stack
 
