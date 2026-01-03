@@ -57,14 +57,12 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 - **Dark Mode**: Switch between light and dark themes
 - **Persistent Preferences**: All settings are saved locally
 
-#### Settings Screenshot
-<p align="center" display="inline">
-  Dark mode<br>
+#### Settings Screenshots
+<p align="center">
   <img src="https://github.com/igorosky/the-quackapp/blob/a3360759f2a508f75c8652ba5cedb8cd0632ea48/screenshots/ss_settings.png" alt="Settings Screenshot Dark mode" width="30%"/>
-</p>
-<p align="center" display="inline">
-  Light mode<br>
-  <img src="https://github.com/igorosky/the-quackapp/blob/02a557bfedd31640ebd5287fb3b866425047fda5/screenshots/ss_settings_light.png" alt="Home Screen Screenshot Light mode" width="30%"/>
+  <img src="https://github.com/igorosky/the-quackapp/blob/02a557bfedd31640ebd5287fb3b866425047fda5/screenshots/ss_settings_light.png" alt="Settings Screenshot Light mode" width="30%"/>
+  <br>
+  <em>Dark mode (left) and Light mode (right)</em>
 </p>
 
 ## Technical Stack
