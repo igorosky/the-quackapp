@@ -57,6 +57,7 @@ struct DuckManifestItem: Decodable {
     let find_this_bird:    String?
     let images:            [String]?
     let videos:            [String]?
+    let sounds:            [String]?
     let regions:           [String]?
 }
 
@@ -129,6 +130,7 @@ final class DucksStore: ObservableObject {
                             if regions.isEmpty { regions = [.all] }
                             var images:    [String] = []
                             var videos:    [String] = []
+                            var sounds:    [String] = []
                             var basicDesc: String   = ""
                             var cool:      String?  = nil
                             var find:      String?  = nil
@@ -138,6 +140,9 @@ final class DucksStore: ObservableObject {
                             }
                             if let vids = item.videos {
                                 videos = vids.map { self.baseURL.appendingPathComponent($0).absoluteString }
+                            }
+                            if let snds = item.sounds {
+                                sounds = snds.map { self.baseURL.appendingPathComponent($0).absoluteString }
                             }
                             if let descPath = item.basic_description {
                                 basicDesc = self.fetchText(relative: descPath) ?? ""
@@ -160,7 +165,7 @@ final class DucksStore: ObservableObject {
                                 findThisBird:     find, 
                                 images:           images, 
                                 videos:           videos, 
-                                sounds:           []
+                                sounds:           sounds
                             )
                             DispatchQueue.main.async {
                                 loaded.append(duck)

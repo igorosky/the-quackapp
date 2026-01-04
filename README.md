@@ -137,7 +137,7 @@ The app fetches duck data from a configurable server endpoint. The server should
     "regions": ["North America", "Europe", "Asia"],
     "images": ["image1.jpg", "image2.jpg"],
     "videos": ["video1.mp4"],
-    "sounds": ["call1.mp3"]
+    "sounds": ["sound1.mp3"]
   }
 ]
 ```
