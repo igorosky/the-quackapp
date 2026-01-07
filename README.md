@@ -86,16 +86,20 @@ TheQuackApp/
 │   │   └── DuckOfTheDay.swift      # Daily duck rotation logic
 │   ├── Ducks/
 │   │   ├── DucksListView.swift     # Search and browse ducks
-│   │   ├── DuckDetailView.swift    # Detailed duck information
-│   │   └── MediaGridView.swift     # Media gallery grid
+│   │   └── DuckDetailView.swift    # Detailed duck information
 │   ├── Media/
 │   │   ├── MediaView.swift         # Media player view
-│   │   └── MediaImage.swift        # Async image loader component
+│   │   ├── MediaImage.swift        # Async image loader component
+│   │   └── MediaGridView.swift     # Media gallery grid
 │   ├── Settings/
 │   │   └── SettingsView.swift      # App settings
 │   └── ContentView.swift           # Root navigation view
 ├── Models/
-│   ├── Models.swift                # Data models and network layer
+│   ├── Duck.swift                  # Main duck data model
+│   ├── DuckManifestItem.swift      # Duck manifest structure
+│   ├── DucksStore.swift            # Duck data store and network layer
+│   ├── Region.swift                # Geographical region enumeration
+│   ├── Configuration.swift         # Server configuration
 │   └── AppSettings.swift           # User preferences manager
 ├── Theme/
 │   └── Theme.swift                 # Color theme definitions
@@ -106,9 +110,11 @@ TheQuackApp/
 
 ### Models
 - **Duck**: Main data model with images, videos, sounds, and descriptions
+- **DuckManifestItem**: Structure for parsing duck data from server manifest
 - **Region**: Enumeration of geographical regions
 - **DucksStore**: ObservableObject that fetches and manages duck data from server
-- **DuckOfTheDay**: Singleton that handles daily duck rotation
+- **Configuration**: Server configuration model
+- **AppSettings**: User preferences and settings manager
 
 ### Theme System
 - Custom color palette with support for light/dark modes
