@@ -1,56 +1,6 @@
 import Combine
 import Foundation
 
-enum Region: String, CaseIterable {
-    case all = "All"
-    case northAmerica = "North America"
-    case southAmerica = "South America"
-    case europe = "Europe"
-    case asia = "Asia"
-    case africa = "Africa"
-    case oceania = "Oceania"
-    case antarctica = "Antarctica"
-}
-
-struct Duck: Identifiable, Hashable {
-    let id = UUID()
-    let name: String
-    let scientificName: String?
-    let regions: [Region]
-    let shortDescription: String
-    let description: String
-    // Optional extended text loaded from server
-    var coolFacts: String?
-    var findThisBird: String?
-    // Placeholders for media
-    let images: [String]
-    let videos: [String]
-    let sounds: [String]
-
-    // Implement Hashable manually since UUID doesn't automatically get included
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-
-    static func == (lhs: Duck, rhs: Duck) -> Bool {
-        lhs.id == rhs.id
-    }
-}
-
-// A simple manifest item expected from the server. The server-side `manifest.json` should be an array
-// of objects describing each duck. Fields are optional to allow graceful fallback to local samples.
-struct DuckManifestItem: Decodable {
-    let species_name: String?
-    let scientific_name: String?
-    let basic_description: String?
-    let cool_facts: String?
-    let find_this_bird: String?
-    let images: [String]?
-    let videos: [String]?
-    let sounds: [String]?
-    let regions: [String]?
-}
-
 final class DucksStore: ObservableObject {
     @Published var ducks: [Duck] = []
     @Published var isLoading: Bool = true
