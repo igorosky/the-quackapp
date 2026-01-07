@@ -3,8 +3,8 @@ import Foundation
 
 final class DuckOfTheDay: ObservableObject {
     static let shared = DuckOfTheDay()
-    private let nameKey = "duckOfTheDayName"
-    private let dateKey = "duckOfTheDayDate"
+    private let nameKey = Configuration.UserDefaultsKeys.duckOfTheDayName
+    private let dateKey = Configuration.UserDefaultsKeys.duckOfTheDayDate
 
     @Published private(set) var currentDuck: Duck?
 
@@ -12,9 +12,9 @@ final class DuckOfTheDay: ObservableObject {
 
     private func todayString() -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = Configuration.DateFormat.standardDate
         formatter.timeZone = TimeZone.current
-        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.locale = Locale(identifier: Configuration.DateFormat.locale)
         return formatter.string(from: Date())
     }
 

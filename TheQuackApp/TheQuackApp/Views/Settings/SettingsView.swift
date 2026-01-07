@@ -67,13 +67,13 @@ struct SettingsView: View {
                         HStack {
                             Text("App version")
                             Spacer()
-                            Text("1.0.0").foregroundColor(.secondary)
+                            Text(Configuration.App.version).foregroundColor(.secondary)
                         }
                         Divider()
                         VStack(alignment: .leading, spacing: 8) {
                             Text("[DEV] Ducks server URL")
                             TextField(
-                                "http://localhost/",
+                                Configuration.Network.defaultServerURL,
                                 text: Binding(
                                     get: { settings.serverBaseURL },
                                     set: { settings.serverBaseURL = $0 }

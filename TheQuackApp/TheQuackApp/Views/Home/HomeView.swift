@@ -43,16 +43,17 @@ struct HomeView: View {
 
                 // Greeting title
                 Text("Hello, Ornithologist!")
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.system(size: 50, weight: .bold))
                     .foregroundColor(.white)
                     .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 2)
                     .shadow(color: .black.opacity(0.2), radius: 1, x: 0, y: 1)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
 
                 // Duck of the day section
                 VStack(spacing: 5) {
                     Text("Duck of the day")
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .font(.system(size: 22, weight: .semibold))
                         .foregroundColor(.white)
                         .shadow(
@@ -67,7 +68,6 @@ struct HomeView: View {
                             x: 0,
                             y: 1
                         )
-                        .frame(maxWidth: .infinity, alignment: .leading)
 
                     // Ensure there is a selection for today when this view appears
                     Color.clear.onAppear {

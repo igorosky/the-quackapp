@@ -3,9 +3,9 @@ import SwiftUI
 
 final class AppSettings: ObservableObject {
     let objectWillChange = ObservableObjectPublisher()
-    private static let namesKey = "showScientificNames"
-    private static let serverKey = "serverBaseURL"
-    private static let darkModeKey = "darkMode"
+    private static let namesKey = Configuration.UserDefaultsKeys.showScientificNames
+    private static let serverKey = Configuration.UserDefaultsKeys.serverBaseURL
+    private static let darkModeKey = Configuration.UserDefaultsKeys.darkMode
     static let shared = AppSettings()
 
     // Tells whether to show scientific names in the UI
@@ -41,7 +41,7 @@ final class AppSettings: ObservableObject {
             ?? false
         self.serverBaseURL =
             UserDefaults.standard.string(forKey: Self.serverKey)
-            ?? "http://localhost/"
+            ?? Configuration.Network.defaultServerURL
         self.darkMode =
             UserDefaults.standard.object(forKey: Self.darkModeKey) as? Bool
             ?? false
