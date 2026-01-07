@@ -1,30 +1,20 @@
-/**
- * *****************************************************************************
- * @file           : DuckOfTheDay.swift
- * @author         : Alex Rogoziński
- * @brief          : This file contains the singleton class that manages the
-                     "Duck of the Day" feature, selecting and persisting a daily
-                     duck choice.
- * *****************************************************************************
- */
-
-import Foundation
 import Combine
+import Foundation
 
 final class DuckOfTheDay: ObservableObject {
-    static  let shared  = DuckOfTheDay()
+    static let shared = DuckOfTheDay()
     private let nameKey = "duckOfTheDayName"
     private let dateKey = "duckOfTheDayDate"
-    
+
     @Published private(set) var currentDuck: Duck?
 
     private init() {}
 
     private func todayString() -> String {
-        let formatter        = DateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        formatter.timeZone   = TimeZone.current
-        formatter.locale     = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone.current
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter.string(from: Date())
     }
 
@@ -35,11 +25,12 @@ final class DuckOfTheDay: ObservableObject {
             return
         }
 
-        let defaults  = UserDefaults.standard
+        let defaults = UserDefaults.standard
         let savedDate = defaults.string(forKey: dateKey)
-        let today     = todayString()
+        let today = todayString()
 
-        if savedDate == today, let savedName = defaults.string(forKey: nameKey) {
+        if savedDate == today, let savedName = defaults.string(forKey: nameKey)
+        {
             // Try to find the duck with this name
             if let found = ducks.first(where: { $0.name == savedName }) {
                 currentDuck = found
@@ -48,7 +39,7 @@ final class DuckOfTheDay: ObservableObject {
         }
 
         // Otherwise pick a new one for today
-        let chosen  = ducks.randomElement()!
+        let chosen = ducks.randomElement()!
         currentDuck = chosen
         defaults.set(chosen.name, forKey: nameKey)
         defaults.set(today, forKey: dateKey)
@@ -56,9 +47,12 @@ final class DuckOfTheDay: ObservableObject {
 
     // Force a new random duck
     func refresh(from ducks: [Duck]) {
-        guard !ducks.isEmpty else { currentDuck = nil; return }
-        let chosen   = ducks.randomElement()!
-        currentDuck  = chosen
+        guard !ducks.isEmpty else {
+            currentDuck = nil
+            return
+        }
+        let chosen = ducks.randomElement()!
+        currentDuck = chosen
         let defaults = UserDefaults.standard
         defaults.set(chosen.name, forKey: nameKey)
         defaults.set(todayString(), forKey: dateKey)

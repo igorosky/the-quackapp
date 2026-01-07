@@ -1,11 +1,3 @@
-/**
- * *****************************************************************************
- * @file           : TheQuackAppApp.swift
- * @author         : Alex Rogoziński
- * @brief          : This file contains the main entry point for TheQuackApp.
- * *****************************************************************************
- */
-
 import SwiftUI
 
 @main

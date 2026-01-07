@@ -1,26 +1,20 @@
-/**
- * *****************************************************************************
- * @file           : AppSettings.swift
- * @author         : Alex Rogoziński
- * @brief          : This file contains app settings like konfiguration of duck
-                     server URL and display of scientific names.
- * *****************************************************************************
- */
-
-import SwiftUI
 import Combine
+import SwiftUI
 
 final class AppSettings: ObservableObject {
-    let objectWillChange           = ObservableObjectPublisher()
-    private static let namesKey    = "showScientificNames"
-    private static let serverKey   = "serverBaseURL"
+    let objectWillChange = ObservableObjectPublisher()
+    private static let namesKey = "showScientificNames"
+    private static let serverKey = "serverBaseURL"
     private static let darkModeKey = "darkMode"
-    static let shared              = AppSettings()
+    static let shared = AppSettings()
 
     // Tells whether to show scientific names in the UI
     var showScientificNames: Bool {
         didSet {
-            UserDefaults.standard.set(showScientificNames, forKey: Self.namesKey)
+            UserDefaults.standard.set(
+                showScientificNames,
+                forKey: Self.namesKey
+            )
             objectWillChange.send()
         }
     }
@@ -42,8 +36,14 @@ final class AppSettings: ObservableObject {
     }
 
     private init() {
-        self.showScientificNames = UserDefaults.standard.object(forKey: Self.namesKey) as? Bool ?? false
-        self.serverBaseURL       = UserDefaults.standard.string(forKey: Self.serverKey) ?? "http://localhost/"
-        self.darkMode            = UserDefaults.standard.object(forKey: Self.darkModeKey) as? Bool ?? false
+        self.showScientificNames =
+            UserDefaults.standard.object(forKey: Self.namesKey) as? Bool
+            ?? false
+        self.serverBaseURL =
+            UserDefaults.standard.string(forKey: Self.serverKey)
+            ?? "http://localhost/"
+        self.darkMode =
+            UserDefaults.standard.object(forKey: Self.darkModeKey) as? Bool
+            ?? false
     }
 }

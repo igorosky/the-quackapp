@@ -1,22 +1,17 @@
-/**
- * *****************************************************************************
- * @file           : HomeView.swift
- * @author         : Alex Rogoziński
- * @brief          : This file contains the UI view for the home screen of 
-                     the app.
- * *****************************************************************************
- */
-
 import SwiftUI
 
 struct HomeView: View {
     @ObservedObject private var duckOfTheDay = DuckOfTheDay.shared
-    @StateObject    private var store        = DucksStore()
+    @StateObject private var store = DucksStore()
 
     var body: some View {
         ZStack {
-            LinearGradient(colors: [Theme.bgTop, Theme.bgBottom], startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
+            LinearGradient(
+                colors: [Theme.bgTop, Theme.bgBottom],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
 
             VStack(spacing: 24) {
                 // Header with app title and settings button
@@ -24,8 +19,18 @@ struct HomeView: View {
                     Text("TheQuackApp")
                         .font(.title2).bold()
                         .foregroundColor(.white)
-                        .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 2)
-                        .shadow(color: .black.opacity(0.2), radius: 1, x: 0, y: 1)
+                        .shadow(
+                            color: .black.opacity(0.3),
+                            radius: 3,
+                            x: 0,
+                            y: 2
+                        )
+                        .shadow(
+                            color: .black.opacity(0.2),
+                            radius: 1,
+                            x: 0,
+                            y: 1
+                        )
                     Spacer()
                     NavigationLink(destination: SettingsView()) {
                         Image(systemName: "gearshape.fill")
@@ -50,15 +55,25 @@ struct HomeView: View {
                     Text("Duck of the day")
                         .font(.system(size: 22, weight: .semibold))
                         .foregroundColor(.white)
-                        .shadow(color: .black.opacity(0.3), radius: 3, x: 0, y: 2)
-                        .shadow(color: .black.opacity(0.2), radius: 1, x: 0, y: 1)
+                        .shadow(
+                            color: .black.opacity(0.3),
+                            radius: 3,
+                            x: 0,
+                            y: 2
+                        )
+                        .shadow(
+                            color: .black.opacity(0.2),
+                            radius: 1,
+                            x: 0,
+                            y: 1
+                        )
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     // Ensure there is a selection for today when this view appears
                     Color.clear.onAppear {
                         DuckOfTheDay.shared.updateIfNeeded(from: store.ducks)
                     }
-                    .onReceive(store.$ducks) { 
+                    .onReceive(store.$ducks) {
                         ducks in DuckOfTheDay.shared.updateIfNeeded(from: ducks)
                     }
 
@@ -71,7 +86,7 @@ struct HomeView: View {
                                     RoundedRectangle(cornerRadius: 28)
                                         .stroke(Color.black.opacity(0.02))
                                 )
-                            
+
                             // Loading state animation
                             VStack(spacing: 12) {
                                 ProgressView()
@@ -81,8 +96,7 @@ struct HomeView: View {
                                     .foregroundColor(.secondary.opacity(0.7))
                             }
                         }
-                    } 
-                    else if let duck = duckOfTheDay.currentDuck {
+                    } else if let duck = duckOfTheDay.currentDuck {
                         // Duck image and part of description
                         VStack(spacing: 0) {
                             VStack(spacing: 0) {
@@ -111,18 +125,23 @@ struct HomeView: View {
                             )
 
                             // Check details button
-                            NavigationLink(destination: DuckDetailView(duck: duck)) {
+                            NavigationLink(
+                                destination: DuckDetailView(duck: duck)
+                            ) {
                                 Text("Check details")
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 16)
-                                    .background(RoundedRectangle(cornerRadius: 24).fill(Theme.buttonGreen))
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 24).fill(
+                                            Theme.buttonGreen
+                                        )
+                                    )
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 24)
                                     .padding(.top, 16)
                             }
                         }
-                    } 
-                    else {
+                    } else {
                         ZStack {
                             RoundedRectangle(cornerRadius: 28)
                                 .fill(Theme.cardBackground.opacity(0.98))
@@ -131,7 +150,7 @@ struct HomeView: View {
                                     RoundedRectangle(cornerRadius: 28)
                                         .stroke(Color.black.opacity(0.02))
                                 )
-                            
+
                             // No duck available state
                             VStack(spacing: 12) {
                                 Image(systemName: "bird.fill")
@@ -158,7 +177,11 @@ struct HomeView: View {
                         .font(.title2)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(RoundedRectangle(cornerRadius: 30).fill(Theme.cardBackground))
+                        .background(
+                            RoundedRectangle(cornerRadius: 30).fill(
+                                Theme.cardBackground
+                            )
+                        )
                         .padding(.horizontal)
                 }
 
