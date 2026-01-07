@@ -60,7 +60,7 @@ final class DucksStore: ObservableObject {
     init() {
         let base =
             URL(string: AppSettings.shared.serverBaseURL) ?? URL(
-                string: "http://localhost/"
+                string: Configuration.Network.defaultServerURL
             )!
         self.baseURL = base
         // Subscribe to settings changes so updating the server URL will refresh the manifest
@@ -69,7 +69,7 @@ final class DucksStore: ObservableObject {
             guard let self = self else { return }
             let newURL =
                 URL(string: AppSettings.shared.serverBaseURL) ?? URL(
-                    string: "http://localhost/"
+                    string: Configuration.Network.defaultServerURL
                 )!
             if newURL != self.baseURL {
                 self.baseURL = newURL
@@ -82,9 +82,7 @@ final class DucksStore: ObservableObject {
 
     private func fetchManifest() {
         // Try multiple common manifest locations so the app is resilient to different mount setups.
-        let candidatePaths = [
-            "manifest.json", "ducks/manifest.json", "/ducks/manifest.json",
-        ]
+        let candidatePaths = Configuration.Network.manifestPaths
 
         func tryCandidate(_ index: Int) {
             guard index < candidatePaths.count else {
@@ -100,7 +98,7 @@ final class DucksStore: ObservableObject {
             let request = URLRequest(
                 url: manifestURL,
                 cachePolicy: .reloadIgnoringLocalCacheData,
-                timeoutInterval: 6
+                timeoutInterval: Configuration.Network.requestTimeout
             )
 
             URLSession.shared.dataTask(with: request) { data, resp, err in
