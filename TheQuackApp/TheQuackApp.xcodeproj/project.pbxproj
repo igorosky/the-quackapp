@@ -6,11 +6,35 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		935977692F154D1C0042C086 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A180E1D12EA671480087F87D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A180E1D82EA671480087F87D;
+			remoteInfo = TheQuackApp;
+		};
+		93EDD1622F154113004967A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A180E1D12EA671480087F87D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A180E1D82EA671480087F87D;
+			remoteInfo = TheQuackApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		934AAA0D2F154E4500152C32 /* TheQuackApp_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheQuackApp_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		934C44572F09653600555522 /* TheQuackApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheQuackApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		93EDD15E2F154113004967A7 /* TheQuackAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheQuackAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		93EDD15F2F154113004967A7 /* TheQuackAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TheQuackAppTests;
+			sourceTree = "<group>";
+		};
 		A180E1DB2EA671480087F87D /* TheQuackApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = TheQuackApp;
@@ -19,6 +43,20 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		935977622F154D1C0042C086 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93EDD15B2F154113004967A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A180E1D62EA671480087F87D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -34,12 +72,58 @@
 			children = (
 				A180E1DB2EA671480087F87D /* TheQuackApp */,
 				934C44572F09653600555522 /* TheQuackApp.app */,
+				93EDD15E2F154113004967A7 /* TheQuackAppTests.xctest */,
+				93EDD15F2F154113004967A7 /* TheQuackAppTests */,
+				934AAA0D2F154E4500152C32 /* TheQuackApp_Tests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		935977642F154D1C0042C086 /* TheQuackApp_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9359776D2F154D1C0042C086 /* Build configuration list for PBXNativeTarget "TheQuackApp_Tests" */;
+			buildPhases = (
+				935977612F154D1C0042C086 /* Sources */,
+				935977622F154D1C0042C086 /* Frameworks */,
+				935977632F154D1C0042C086 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9359776A2F154D1C0042C086 /* PBXTargetDependency */,
+			);
+			name = TheQuackApp_Tests;
+			packageProductDependencies = (
+			);
+			productName = TheQuackApp_Tests;
+			productReference = 934AAA0D2F154E4500152C32 /* TheQuackApp_Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		93EDD15D2F154113004967A7 /* TheQuackAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93EDD1662F154113004967A7 /* Build configuration list for PBXNativeTarget "TheQuackAppTests" */;
+			buildPhases = (
+				93EDD15A2F154113004967A7 /* Sources */,
+				93EDD15B2F154113004967A7 /* Frameworks */,
+				93EDD15C2F154113004967A7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				93EDD1632F154113004967A7 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				93EDD15F2F154113004967A7 /* TheQuackAppTests */,
+			);
+			name = TheQuackAppTests;
+			packageProductDependencies = (
+			);
+			productName = TheQuackAppTests;
+			productReference = 93EDD15E2F154113004967A7 /* TheQuackAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A180E1D82EA671480087F87D /* TheQuackApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A180E1E42EA671490087F87D /* Build configuration list for PBXNativeTarget "TheQuackApp" */;
@@ -69,9 +153,17 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2600;
+				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 2620;
 				TargetAttributes = {
+					935977642F154D1C0042C086 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = A180E1D82EA671480087F87D;
+					};
+					93EDD15D2F154113004967A7 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = A180E1D82EA671480087F87D;
+					};
 					A180E1D82EA671480087F87D = {
 						CreatedOnToolsVersion = 26.0;
 					};
@@ -92,11 +184,27 @@
 			projectRoot = "";
 			targets = (
 				A180E1D82EA671480087F87D /* TheQuackApp */,
+				93EDD15D2F154113004967A7 /* TheQuackAppTests */,
+				935977642F154D1C0042C086 /* TheQuackApp_Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		935977632F154D1C0042C086 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93EDD15C2F154113004967A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A180E1D72EA671480087F87D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -107,6 +215,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		935977612F154D1C0042C086 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93EDD15A2F154113004967A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A180E1D52EA671480087F87D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -116,7 +238,108 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		9359776A2F154D1C0042C086 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A180E1D82EA671480087F87D /* TheQuackApp */;
+			targetProxy = 935977692F154D1C0042C086 /* PBXContainerItemProxy */;
+		};
+		93EDD1632F154113004967A7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A180E1D82EA671480087F87D /* TheQuackApp */;
+			targetProxy = 93EDD1622F154113004967A7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		9359776B2F154D1C0042C086 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 932LRJSYQU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.TheQuackApp-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheQuackApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TheQuackApp";
+			};
+			name = Debug;
+		};
+		9359776C2F154D1C0042C086 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 932LRJSYQU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.TheQuackApp-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheQuackApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TheQuackApp";
+			};
+			name = Release;
+		};
+		93EDD1642F154113004967A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 932LRJSYQU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheQuackAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheQuackApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TheQuackApp";
+			};
+			name = Debug;
+		};
+		93EDD1652F154113004967A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 932LRJSYQU;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.TheQuackAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheQuackApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TheQuackApp";
+			};
+			name = Release;
+		};
 		A180E1E22EA671490087F87D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -170,7 +393,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -229,7 +452,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -307,6 +530,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9359776D2F154D1C0042C086 /* Build configuration list for PBXNativeTarget "TheQuackApp_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9359776B2F154D1C0042C086 /* Debug */,
+				9359776C2F154D1C0042C086 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		93EDD1662F154113004967A7 /* Build configuration list for PBXNativeTarget "TheQuackAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93EDD1642F154113004967A7 /* Debug */,
+				93EDD1652F154113004967A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A180E1D42EA671480087F87D /* Build configuration list for PBXProject "TheQuackApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
