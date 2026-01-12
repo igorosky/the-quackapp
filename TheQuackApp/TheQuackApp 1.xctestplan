@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "FD063C07-4105-4788-8E42-3CD8C6CAEBFB",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:TheQuackApp.xcodeproj",
+      "identifier" : "A180E1D82EA671480087F87D",
+      "name" : "TheQuackApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:TheQuackApp.xcodeproj",
+        "identifier" : "93EDD15D2F154113004967A7",
+        "name" : "TheQuackAppTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:TheQuackApp.xcodeproj",
+        "identifier" : "93C5DF482F15A8180023E567",
+        "name" : "TheQuackAppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
