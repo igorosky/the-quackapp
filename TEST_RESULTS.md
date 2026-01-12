@@ -2,13 +2,13 @@
 
 ## Overview
 
-This document contains the test results for **TheQuackApp** iOS application. The test suite includes three types of tests covering different aspects of the application.
+This document contains the test results for **TheQuackApp** iOS application. The test suite includes three types of tests (4 tests each) covering different aspects of the application.
 
-| Test Type | Description | Files |
-|-----------|-------------|-------|
-| **Unit Tests** | Tests for individual models and business logic | `DuckModelTests.swift`, `DuckManifestItemTests.swift` |
-| **Integration Tests** | Tests for component interactions and data flow | `DuckOfTheDayTests.swift`, `DucksStoreTests.swift`, `AppSettingsTests.swift` |
-| **UI Tests** | End-to-end user interface tests | `TheQuackAppUITests.swift`, `TheQuackAppUITestsLaunchTests.swift` |
+| Test Type | Description | File |
+|-----------|-------------|------|
+| **Unit Tests** | Tests for models, data types, and JSON decoding | `UnitTests.swift` |
+| **Integration Tests** | Tests for component interactions and data persistence | `IntegrationTests.swift` |
+| **UI Tests** | End-to-end user interface and navigation tests | `UITests.swift` |
 
 ---
 
@@ -19,7 +19,7 @@ This document contains the test results for **TheQuackApp** iOS application. The
 | **Date** | `[INSERT DATE]` |
 | **Xcode Version** | `[INSERT VERSION]` |
 | **iOS Simulator** | `[INSERT DEVICE/VERSION]` |
-| **Total Tests** | `[INSERT COUNT]` |
+| **Total Tests** | 12 |
 | **Passed** | `[INSERT COUNT]` |
 | **Failed** | `[INSERT COUNT]` |
 | **Skipped** | `[INSERT COUNT]` |
@@ -29,160 +29,46 @@ This document contains the test results for **TheQuackApp** iOS application. The
 
 ## 1. Unit Tests Results
 
-### DuckModelTests.swift
+Tests for core models and data structures.
 
-Tests for the `Duck` model, `Region` enum, and `Configuration` constants.
+| # | Test Name | Description | Status | Duration |
+|---|-----------|-------------|--------|----------|
+| 1 | `testDuckModelInitializationWithAllProperties` | Verifies Duck model initializes correctly with all properties | ⏳ | - |
+| 2 | `testEachDuckHasUniqueIdentifier` | Ensures each Duck instance gets a unique ID | ⏳ | - |
+| 3 | `testRegionEnumHasAllContinentsWithCorrectValues` | Validates all 8 regions exist with correct raw values | ⏳ | - |
+| 4 | `testDuckManifestItemDecodesFromJSON` | Tests JSON decoding of server manifest data | ⏳ | - |
 
-| Test Name | Status | Duration |
-|-----------|--------|----------|
-| `testDuckInitialization` | ⏳ | - |
-| `testDuckWithNilOptionalProperties` | ⏳ | - |
-| `testDuckIdentifiable` | ⏳ | - |
-| `testDuckHashable` | ⏳ | - |
-| `testDuckEquatable` | ⏳ | - |
-| `testRegionRawValues` | ⏳ | - |
-| `testRegionCaseIterableCount` | ⏳ | - |
-| `testRegionInitFromRawValue` | ⏳ | - |
-| `testAllRegionsHaveNonEmptyRawValues` | ⏳ | - |
-| `testConfigurationAppConstants` | ⏳ | - |
-| `testConfigurationNetworkConstants` | ⏳ | - |
-| `testConfigurationUserDefaultsKeys` | ⏳ | - |
-| `testConfigurationDateFormatConstants` | ⏳ | - |
-
-**Summary:** `[X/13 passed]`
-
-### DuckManifestItemTests.swift
-
-Tests for JSON decoding of manifest items from the server.
-
-| Test Name | Status | Duration |
-|-----------|--------|----------|
-| `testFullManifestItemDecoding` | ⏳ | - |
-| `testMinimalManifestItemDecoding` | ⏳ | - |
-| `testEmptyManifestItemDecoding` | ⏳ | - |
-| `testManifestItemWithEmptyArrays` | ⏳ | - |
-| `testManifestArrayDecoding` | ⏳ | - |
-| `testManifestItemWithSpecialCharacters` | ⏳ | - |
-| `testManifestItemWithMultipleRegions` | ⏳ | - |
-
-**Summary:** `[X/7 passed]`
+**Summary:** `[X/4 passed]`
 
 ---
 
 ## 2. Integration Tests Results
 
-### DuckOfTheDayTests.swift
+Tests for component interactions and data flow.
 
-Tests for the Duck of the Day feature including persistence and daily selection.
+| # | Test Name | Description | Status | Duration |
+|---|-----------|-------------|--------|----------|
+| 1 | `testDuckOfTheDaySelectsAndPersistsDuck` | Verifies duck selection and daily persistence to UserDefaults | ⏳ | - |
+| 2 | `testDucksStoreInitializesWithLoadingState` | Confirms store starts in loading state with valid URL | ⏳ | - |
+| 3 | `testAppSettingsPersistsToUserDefaults` | Tests settings persistence (toggles, server URL) | ⏳ | - |
+| 4 | `testAppSettingsPublishesChangesToObservers` | Validates ObservableObject reactivity for SwiftUI | ⏳ | - |
 
-| Test Name | Status | Duration |
-|-----------|--------|----------|
-| `testUpdateIfNeededWithEmptyDucks` | ⏳ | - |
-| `testUpdateIfNeededSelectsDuckWhenNoneSet` | ⏳ | - |
-| `testUpdateIfNeededPersistsDuckForToday` | ⏳ | - |
-| `testUpdateIfNeededSavesDuckNameToUserDefaults` | ⏳ | - |
-| `testUpdateIfNeededSavesDateToUserDefaults` | ⏳ | - |
-| `testUpdateIfNeededReturnsPersistedDuckIfFound` | ⏳ | - |
-| `testUpdateIfNeededSelectsNewDuckWhenPersistedNotFound` | ⏳ | - |
-| `testRefreshWithEmptyDucks` | ⏳ | - |
-| `testRefreshSelectsNewDuck` | ⏳ | - |
-| `testRefreshUpdatesUserDefaults` | ⏳ | - |
-| `testCurrentDuckPublishesChanges` | ⏳ | - |
-
-**Summary:** `[X/11 passed]`
-
-### DucksStoreTests.swift
-
-Tests for the ducks data store including initialization and URL handling.
-
-| Test Name | Status | Duration |
-|-----------|--------|----------|
-| `testStoreInitialState` | ⏳ | - |
-| `testStoreBaseURLInitialization` | ⏳ | - |
-| `testDucksPropertyIsPublished` | ⏳ | - |
-| `testIsLoadingPropertyIsPublished` | ⏳ | - |
-| `testValidBaseURLConfiguration` | ⏳ | - |
-| `testInvalidBaseURLFallsBackToDefault` | ⏳ | - |
-| `testStoreReactsToServerURLChange` | ⏳ | - |
-| `testManifestPathsConfiguration` | ⏳ | - |
-| `testRequestTimeoutConfiguration` | ⏳ | - |
-
-**Summary:** `[X/9 passed]`
-
-### AppSettingsTests.swift
-
-Tests for app settings persistence and observable behavior.
-
-| Test Name | Status | Duration |
-|-----------|--------|----------|
-| `testSharedInstanceExists` | ⏳ | - |
-| `testSharedInstanceIsSingleton` | ⏳ | - |
-| `testShowScientificNamesDefaultValue` | ⏳ | - |
-| `testShowScientificNamesPersistence` | ⏳ | - |
-| `testShowScientificNamesToggle` | ⏳ | - |
-| `testServerBaseURLDefaultValue` | ⏳ | - |
-| `testServerBaseURLPersistence` | ⏳ | - |
-| `testServerBaseURLWithDifferentFormats` | ⏳ | - |
-| `testDarkModeDefaultValue` | ⏳ | - |
-| `testDarkModePersistence` | ⏳ | - |
-| `testDarkModeToggle` | ⏳ | - |
-| `testSettingsPublishesChangesForScientificNames` | ⏳ | - |
-| `testSettingsPublishesChangesForServerURL` | ⏳ | - |
-| `testSettingsPublishesChangesForDarkMode` | ⏳ | - |
-| `testEmptyServerURL` | ⏳ | - |
-| `testMultipleRapidChanges` | ⏳ | - |
-
-**Summary:** `[X/16 passed]`
+**Summary:** `[X/4 passed]`
 
 ---
 
 ## 3. UI Tests Results
 
-### TheQuackAppUITests.swift
-
 End-to-end tests for user interface interactions.
 
-| Test Name | Status | Duration |
-|-----------|--------|----------|
-| `testHomeViewDisplaysAppTitle` | ⏳ | - |
-| `testHomeViewDisplaysGreeting` | ⏳ | - |
-| `testHomeViewDisplaysDuckOfTheDaySection` | ⏳ | - |
-| `testHomeViewHasSettingsButton` | ⏳ | - |
-| `testNavigateToSettingsFromHome` | ⏳ | - |
-| `testTabBarExists` | ⏳ | - |
-| `testNavigateToDiscoverDucksTab` | ⏳ | - |
-| `testNavigateBetweenTabs` | ⏳ | - |
-| `testDucksListViewDisplaysSearchBar` | ⏳ | - |
-| `testSearchBarInteraction` | ⏳ | - |
-| `testSearchClearButton` | ⏳ | - |
-| `testRegionPickerExists` | ⏳ | - |
-| `testSettingsViewDisplays` | ⏳ | - |
-| `testSettingsShowScientificNamesToggle` | ⏳ | - |
-| `testSettingsServerURLField` | ⏳ | - |
-| `testSettingsNavigateBack` | ⏳ | - |
-| `testDuckDetailViewNavigation` | ⏳ | - |
-| `testLoadingIndicatorAppears` | ⏳ | - |
-| `testMainElementsAreAccessible` | ⏳ | - |
-| `testImagesHaveAccessibilityLabels` | ⏳ | - |
-| `testLaunchPerformance` | ⏳ | - |
-| `testScrollingPerformance` | ⏳ | - |
+| # | Test Name | Description | Status | Duration |
+|---|-----------|-------------|--------|----------|
+| 1 | `testHomeScreenDisplaysAllExpectedElements` | Verifies home screen shows title, greeting, duck of day, settings | ⏳ | - |
+| 2 | `testTabNavigationBetweenHomeAndDiscover` | Tests navigation between Home and Discover tabs | ⏳ | - |
+| 3 | `testSettingsViewOpensAndContainsControls` | Confirms settings view has toggles and text fields | ⏳ | - |
+| 4 | `testSearchBarAcceptsInputInDucksList` | Tests search functionality in Ducks list view | ⏳ | - |
 
-**Summary:** `[X/22 passed]`
-
-### TheQuackAppUITestsLaunchTests.swift
-
-Launch and startup tests.
-
-| Test Name | Status | Duration |
-|-----------|--------|----------|
-| `testLaunch` | ⏳ | - |
-| `testLaunchToHomeView` | ⏳ | - |
-| `testLaunchWithDifferentOrientations` | ⏳ | - |
-| `testLaunchInDarkMode` | ⏳ | - |
-| `testLaunchInLightMode` | ⏳ | - |
-| `testLaunchPerformance` | ⏳ | - |
-
-**Summary:** `[X/6 passed]`
+**Summary:** `[X/4 passed]`
 
 ---
 
@@ -209,59 +95,19 @@ Launch and startup tests.
 
 ---
 
-## Screenshots (UI Tests)
-
-| Screenshot | Description |
-|------------|-------------|
-| ![Launch Screen](screenshots/launch.png) | App launch screen |
-| ![Home View](screenshots/home.png) | Home view with Duck of the Day |
-| ![Ducks List](screenshots/ducks_list.png) | Discover Ducks list view |
-| ![Settings](screenshots/settings.png) | Settings view |
-
----
-
 ## Running Tests
 
-### Prerequisites
-- Xcode 15.0 or later
-- iOS 17.0+ Simulator or Device
-- macOS Sonoma or later
+### In Xcode
+1. Open `TheQuackApp.xcodeproj`
+2. Press `⌘ + U` to run all tests
+3. Or use Test Navigator (`⌘ + 6`) to run individual tests
 
-### Commands
-
-**Run all tests:**
+### Command Line
 ```bash
 xcodebuild test \
   -project TheQuackApp.xcodeproj \
   -scheme TheQuackApp \
   -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.0'
-```
-
-**Run unit tests only:**
-```bash
-xcodebuild test \
-  -project TheQuackApp.xcodeproj \
-  -scheme TheQuackApp \
-  -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.0' \
-  -only-testing:TheQuackAppTests
-```
-
-**Run UI tests only:**
-```bash
-xcodebuild test \
-  -project TheQuackApp.xcodeproj \
-  -scheme TheQuackApp \
-  -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.0' \
-  -only-testing:TheQuackAppUITests
-```
-
-**Run with code coverage:**
-```bash
-xcodebuild test \
-  -project TheQuackApp.xcodeproj \
-  -scheme TheQuackApp \
-  -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.0' \
-  -enableCodeCoverage YES
 ```
 
 ---
@@ -274,16 +120,6 @@ xcodebuild test \
 | ❌ | Test Failed |
 | ⏭️ | Test Skipped |
 | ⏳ | Pending (not yet run) |
-
----
-
-## Notes
-
-<!-- Add any additional notes about the test run here -->
-
-- 
-- 
-- 
 
 ---
 
