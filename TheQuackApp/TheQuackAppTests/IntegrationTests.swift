@@ -81,7 +81,7 @@ final class IntegrationTests: XCTestCase {
         // Given
         let settings = AppSettings.shared
         let originalValue = settings.showScientificNames
-        let testURL = "http://test.example.com/"
+        let testURL = "https://test.example.com/"
         let originalURL = settings.serverBaseURL
         
         // When - Modify settings
