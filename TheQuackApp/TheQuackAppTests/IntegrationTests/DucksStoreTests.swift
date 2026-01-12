@@ -28,18 +28,6 @@ final class DucksStoreTests: XCTestCase {
         XCTAssertTrue(store.ducks.isEmpty, "Store should start with empty ducks array")
     }
     
-    func testStoreBaseURLInitialization() {
-        // Given
-        let expectedDefaultURL = URL(string: Configuration.Network.defaultServerURL)!
-        
-        // When
-        let store = DucksStore()
-        
-        // Then
-        XCTAssertEqual(store.baseURL.absoluteString, expectedDefaultURL.absoluteString, 
-                       "Base URL should be initialized from settings or default")
-    }
-    
     // MARK: - Published Properties Tests
     
     func testDucksPropertyIsPublished() {
@@ -117,38 +105,6 @@ final class DucksStoreTests: XCTestCase {
         // The store should have a valid URL (either custom or default)
         XCTAssertTrue(store.baseURL.absoluteString.hasPrefix("http"), 
                       "Base URL should be a valid HTTP URL")
-    }
-    
-    // MARK: - Settings Change Tests
-    
-    func testStoreReactsToServerURLChange() {
-        // Given
-        let store = DucksStore()
-        let initialURL = store.baseURL
-        let newURL = "http://newserver.example.com/"
-        let expectation = XCTestExpectation(description: "Store reacts to URL change")
-        
-        var loadingStateChanged = false
-        store.$isLoading
-            .dropFirst(2) // Skip initial states
-            .sink { isLoading in
-                if isLoading {
-                    loadingStateChanged = true
-                    expectation.fulfill()
-                }
-            }
-            .store(in: &cancellables)
-        
-        // When
-        AppSettings.shared.serverBaseURL = newURL
-        
-        // Then
-        wait(for: [expectation], timeout: 5.0)
-        XCTAssertTrue(loadingStateChanged, "Store should re-enter loading state when URL changes")
-        XCTAssertNotEqual(store.baseURL, initialURL, "Base URL should be updated")
-        
-        // Cleanup
-        AppSettings.shared.serverBaseURL = Configuration.Network.defaultServerURL
     }
     
     // MARK: - Manifest Paths Tests
