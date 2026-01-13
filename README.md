@@ -79,36 +79,51 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 
 ```
 TheQuackApp/
-├── App/
-│   └── TheQuackAppApp.swift        # Main app entry point
-├── Views/
-│   ├── Home/
-│   │   ├── HomeView.swift          # Home screen with Duck of the Day
-│   │   └── DuckOfTheDay.swift      # Daily duck rotation logic
-│   ├── Ducks/
-│   │   ├── DucksListView.swift     # Search and browse ducks
-│   │   └── DuckDetailView.swift    # Detailed duck information
-│   ├── Media/
-│   │   ├── MediaView.swift         # Media player view
-│   │   ├── MediaImage.swift        # Async image loader component
-│   │   └── MediaGridView.swift     # Media gallery grid
-│   ├── Settings/
-│   │   └── SettingsView.swift      # App settings
-│   └── ContentView.swift           # Root navigation view
-├── Models/
-│   ├── Duck.swift                  # Main duck data model
-│   ├── DuckManifestItem.swift      # Duck manifest structure
-│   ├── DucksStore.swift            # Duck data store and network layer
-│   ├── Region.swift                # Geographical region enumeration
-│   ├── Configuration.swift         # Server configuration
-│   └── AppSettings.swift           # User preferences manager
-├── Theme/
-│   └── Theme.swift                 # Color theme definitions
-├── Assets.xcassets/                # App assets and colors
-└── Tests/
-    ├── UnitTests.swift             # Unit tests for models and data types
-    ├── IntegrationTests.swift      # Integration tests
-    └── UITests.swift               # UI automation tests
+├── TheQuackApp 1.xctestplan        # Test plan configuration
+├── TheQuackApp/                    # Main app source code
+│   ├── App/
+│   │   └── TheQuackAppApp.swift            # Main app entry point
+│   ├── Views/
+│   │   ├── ContentView.swift               # Root navigation view
+│   │   ├── Home/
+│   │   │   ├── HomeView.swift              # Home screen with Duck of the Day
+│   │   │   └── DuckOfTheDay.swift          # Daily duck rotation logic
+│   │   ├── Ducks/
+│   │   │   ├── DucksListView.swift         # Search and browse ducks
+│   │   │   └── DuckDetailView.swift        # Detailed duck information
+│   │   ├── Media/
+│   │   │   ├── MediaView.swift             # Media player view
+│   │   │   ├── MediaImage.swift            # Async image loader component
+│   │   │   └── MediaGridView.swift         # Media gallery grid
+│   │   └── Settings/
+│   │       └── SettingsView.swift          # App settings
+│   ├── Models/
+│   │   ├── Duck.swift                      # Main duck data model
+│   │   ├── DuckManifestItem.swift          # Duck manifest structure
+│   │   ├── DucksStore.swift                # Duck data store and network layer
+│   │   ├── Region.swift                    # Geographical region enumeration
+│   │   ├── Configuration.swift             # Server configuration
+│   │   └── AppSettings.swift               # User preferences manager
+│   ├── Theme/
+│   │   └── Theme.swift                     # Color theme definitions
+│   └── Assets.xcassets/                    # App assets and colors
+│       ├── AccentColor.colorset/
+│       ├── AppIcon.appiconset/
+│       ├── BackgroundBottom.colorset/
+│       ├── BackgroundTop.colorset/
+│       ├── ButtonGreen.colorset/
+│       ├── CardBackground.colorset/
+│       └── SearchBackground.colorset/
+├── TheQuackApp.xcodeproj/          # Xcode project configuration
+│   ├── project.pbxproj
+│   ├── project.xcworkspace/
+│   ├── xcshareddata/
+│   └── xcuserdata/
+├── TheQuackAppTests/               # Unit and integration tests
+│   ├── UnitTests.swift             # Unit tests for models and data types
+│   └── IntegrationTests.swift      # Integration tests
+└── TheQuackAppUITests/             # UI automation tests
+    └── UITests.swift               # UI test cases
 ```
 
 ## Key Components
