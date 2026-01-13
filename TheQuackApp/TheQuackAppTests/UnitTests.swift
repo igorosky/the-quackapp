@@ -78,7 +78,7 @@ final class UnitTests: XCTestCase {
     
     // MARK: - Test 4: DuckManifestItem JSON Decoding
     /// Verifies that manifest JSON from server can be properly decoded
-    func testDuckManifestItemDecodesFromJSON() throws {
+    @MainActor func testDuckManifestItemDecodesFromJSON() throws {
         // Given - JSON structure matching server response
         let json = """
         {

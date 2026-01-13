@@ -51,7 +51,8 @@
                ReferencedContainer = "container:TheQuackApp.xcodeproj">
             </BuildableReference>
             <SkippedTests>
-               <Test Identifier = "UITests">
+               <Test
+                  Identifier = "UITests">
                </Test>
             </SkippedTests>
          </TestableReference>
