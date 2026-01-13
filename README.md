@@ -73,6 +73,7 @@ A SwiftUI iOS application for exploring and learning about different duck specie
 - **Media Playback**: AVKit and AVFoundation
 - **Data Persistence**: UserDefaults for settings
 - **Image Loading**: Async image loading with caching
+- **Testing**: XCTest framework for unit, integration, and UI tests
 
 ## Project Structure
 
@@ -103,7 +104,11 @@ TheQuackApp/
 │   └── AppSettings.swift           # User preferences manager
 ├── Theme/
 │   └── Theme.swift                 # Color theme definitions
-└── Assets.xcassets/                # App assets and colors
+├── Assets.xcassets/                # App assets and colors
+└── Tests/
+    ├── UnitTests.swift             # Unit tests for models and data types
+    ├── IntegrationTests.swift      # Integration tests
+    └── UITests.swift               # UI automation tests
 ```
 
 ## Key Components
