@@ -72,7 +72,7 @@ final class UnitTests: XCTestCase {
         XCTAssertEqual(Region.asia.rawValue, "Asia")
         XCTAssertEqual(Region.southAmerica.rawValue, "South America")
         XCTAssertEqual(Region.africa.rawValue, "Africa")
-        XCTAssertEqual(Region.australia.rawValue, "Australia")
+        XCTAssertEqual(Region.oceania.rawValue, "Oceania")
         XCTAssertEqual(Region.antarctica.rawValue, "Antarctica")
         
         // Verify region can be created from raw value
