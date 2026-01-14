@@ -44,8 +44,27 @@ final class UITests: XCTestCase {
         let settingsTitle = app.staticTexts["Settings"]
         XCTAssertTrue(settingsTitle.waitForExistence(timeout: 5), "Settings screen should be displayed")
     }
+
+    // MARK: - Test 3: Back Navigation from Settings
+    /// Verifies that users can navigate back from settings to home screen
+    func testBackNavigationFromSettings() {
+        // Given - User navigates to settings
+        let settingsButton = app.buttons["gearshape.fill"]
+        settingsButton.tap()
+        
+        let settingsTitle = app.staticTexts["Settings"]
+        XCTAssertTrue(settingsTitle.waitForExistence(timeout: 5))
+        
+        // When - User taps back button
+        let backButton = app.navigationBars.buttons.element(boundBy: 0)
+        backButton.tap()
+        
+        // Then - Should return to home screen
+        let greeting = app.staticTexts["Hello, Ornithologist!"]
+        XCTAssertTrue(greeting.waitForExistence(timeout: 5), "Should navigate back to home screen")
+    }
     
-    // MARK: - Test 3: Duck List Navigation
+    // MARK: - Test 4: Duck List Navigation
     /// Verifies navigation to the duck list view
     func testTabNavigation() {
         // Given - Search button is visible
@@ -67,23 +86,5 @@ final class UITests: XCTestCase {
         let greeting = app.staticTexts["Hello, Ornithologist!"]
         XCTAssertTrue(greeting.waitForExistence(timeout: 5), "Should return to home screen")
     }
-    
-    // MARK: - Test 4: Back Navigation from Settings
-    /// Verifies that users can navigate back from settings to home screen
-    func testBackNavigationFromSettings() {
-        // Given - User navigates to settings
-        let settingsButton = app.buttons["gearshape.fill"]
-        settingsButton.tap()
-        
-        let settingsTitle = app.staticTexts["Settings"]
-        XCTAssertTrue(settingsTitle.waitForExistence(timeout: 5))
-        
-        // When - User taps back button
-        let backButton = app.navigationBars.buttons.element(boundBy: 0)
-        backButton.tap()
-        
-        // Then - Should return to home screen
-        let greeting = app.staticTexts["Hello, Ornithologist!"]
-        XCTAssertTrue(greeting.waitForExistence(timeout: 5), "Should navigate back to home screen")
-    }
+
 }

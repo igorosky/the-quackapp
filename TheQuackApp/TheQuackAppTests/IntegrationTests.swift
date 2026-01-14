@@ -16,6 +16,7 @@ final class IntegrationTests: XCTestCase {
     }
     
     override func tearDown() {
+        // Clean up UserDefaults
         UserDefaults.standard.removeObject(forKey: Configuration.UserDefaultsKeys.duckOfTheDayName)
         UserDefaults.standard.removeObject(forKey: Configuration.UserDefaultsKeys.duckOfTheDayDate)
         cancellables = nil
