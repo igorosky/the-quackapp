@@ -203,7 +203,3 @@ Media files should be accessible via relative URLs from the base server URL.
 - **Loading States**: Progress indicators during data fetching
 - **Error Handling**: Graceful fallbacks for missing data or network issues
 - **Empty States**: Informative messages when no content is available
-
-## License
-
-*[to be specified]*
